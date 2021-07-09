@@ -1,0 +1,4 @@
+module.exports = {
+	certificates: [],
+    courses: [],
+};
