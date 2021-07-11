@@ -79,7 +79,7 @@ class CoursesDialog extends ComponentDialog {
 			` ${userProfile.courseName} successfully added to your portfolio`,
 		);
 		await stepContext.context.sendActivity('Here are some suggestions:');
-		return await stepContext.context.sendActivity({
+		 await stepContext.context.sendActivity({
 			attachments: [
 				CardFactory.heroCard(
 					'Here are some suggestions: ',

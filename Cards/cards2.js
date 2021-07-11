@@ -211,7 +211,7 @@ module.exports = {
 					items: [
 						{
 							type: 'FactSet',
-							facts: skills,
+							facts: `${skills}`,
 						},
 					],
 				},

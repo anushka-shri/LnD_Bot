@@ -42,7 +42,7 @@ class PortFolioDialog extends ComponentDialog {
 			let skills = user.skills.map((el) => {
 				return {
 					title: JSON.stringify(el.skills),
-					value: el.Provider,
+					value: el.skills,
 				};
 			});
 
