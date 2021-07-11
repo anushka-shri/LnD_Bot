@@ -111,7 +111,7 @@ module.exports = {
 
 		return course;
 	},
-	
+
 	myPortfolio: (user, certificateObj) => {
 		return {
 			type: 'AdaptiveCard',
@@ -235,7 +235,7 @@ module.exports = {
 			],
 		};
 	},
-	showSkills: (skills) => {
+	showSkills: (skillsVal, Prov) => {
 		return {
 			type: 'AdaptiveCard',
 			$schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
@@ -244,10 +244,10 @@ module.exports = {
 				{
 					type: 'TextBlock',
 					wrap: true,
+					text: 'Your Request for adding the certificate with  :-\n',
 					fontType: 'Default',
 					size: 'Medium',
-					color: 'Good',
-					text: 'Your Skills : - ',
+					color: 'Accent',
 				},
 				{
 					type: 'Container',
@@ -255,8 +255,14 @@ module.exports = {
 						{
 							type: 'TextBlock',
 							wrap: true,
+							text: `Skills: ${skillsVal}`,
 							size: 'Large',
-							text: `${skills}`,
+						},
+						{
+							type: 'TextBlock',
+							wrap: true,
+							text: `Provider name: ${Prov}`,
+							size: 'Large',
 						},
 					],
 					separator: true,
@@ -271,9 +277,9 @@ module.exports = {
 								{
 									type: 'TextBlock',
 									wrap: true,
+									text: 'has been successfully added.',
 									size: 'Medium',
-									color: 'Good',
-									text: 'has been successfully added to your portfolio. You can view you skills in ‘My Portfolio’ section anytime.',
+									color: 'Accent',
 								},
 							],
 						},

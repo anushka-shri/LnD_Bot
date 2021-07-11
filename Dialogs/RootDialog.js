@@ -44,7 +44,7 @@ class RootDialog extends ComponentDialog {
 		});
 
 		this.addDialog(new ADDCDialog(userState, conversationState));
-		this.addDialog(new SkillsDialog(conversationState));
+		this.addDialog(new SkillsDialog(userState, conversationState));
 		this.addDialog(new PortFolioDialog(userState, conversationState));
 		this.initialDialogId = parseMessage;
 	}

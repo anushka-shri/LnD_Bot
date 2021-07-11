@@ -8,6 +8,8 @@ const {
 
 const { CardFactory } = require('botbuilder');
 const { skillsDialog } = require('../Constants/dialogIDs');
+const { showSkills } = require('../cards/cards2');
+let user = require('./userProfile');
 
 const ChoicePromptDialog = 'ChoicePromptDialog';
 const NumberPromptDialog = 'NumberPromptDialog';
@@ -15,16 +17,14 @@ const TextPromptDialog = 'TextPromptDialog';
 
 const skillsDialogWF1 = 'skillsDialogWF1';
 class SkillsDialog extends ComponentDialog {
-	constructor(conversationState) {
+	constructor(userState, conversationState) {
 		super(skillsDialog);
 
 		if (!conversationState) throw new Error('conversation state required');
 		this.conversationState = conversationState;
-		// this.userProfileAccessor =
-		// 	this.userState.createProperty('UserProfileState');
-
-		// this.applyLeaveStateAccessor =
-		// 	this.conversationState.createProperty('ApplyLeaveState');
+		this.userState = userState;
+		this.userProfileAccessor =
+			this.userState.createProperty('UserProfileState');
 
 		this.addDialog(new ChoicePrompt(ChoicePromptDialog));
 		this.addDialog(new NumberPrompt(NumberPromptDialog));
@@ -42,8 +42,13 @@ class SkillsDialog extends ComponentDialog {
 	}
 
 	async SkillsInput(stepContext) {
-		await stepContext.context.sendActivity('Please enter your skills details');
-		return await stepContext.prompt(TextPromptDialog, `Enter Skill details :`);
+		await stepContext.context.sendActivity(
+			'Please enter your skills details'
+		);
+		return await stepContext.prompt(
+			TextPromptDialog,
+			`Enter Skill details :`
+		);
 	}
 
 	async ProviderInput(stepContext) {
@@ -60,9 +65,26 @@ class SkillsDialog extends ComponentDialog {
 
 	async sendConfirmation(stepContext) {
 		stepContext.values.Provider = stepContext.result;
-		await stepContext.context.sendActivity(
-			`Your request for adding skills - ${stepContext.values.skillsVal} by provider ${stepContext.values.Provider} has been successfully sent.`,
+
+		let userProfile = await this.userProfileAccessor.get(
+			stepContext.context,
+			{},
 		);
+		userProfile.skillsVal = stepContext.values.skillsVal;
+		userProfile.skillsProvider = stepContext.values.Provider;
+
+		//store data in object
+		user.certificates.push({
+			skillsVal: userProfile.skillsVal,
+			Provider: userProfile.skillsProvider,
+		});
+		await stepContext.context.sendActivity({
+			attachments: [
+				CardFactory.adaptiveCard(
+					showSkills(userProfile.skillsVal, userProfile.skillsProvider),
+				),
+			],
+		});
 
 		await stepContext.context.sendActivity({
 			attachments: [
