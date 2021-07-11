@@ -67,12 +67,16 @@ class RootDialog extends ComponentDialog {
 
 	async routeMessage(stepContext) {
 		let luisResponse = await this.recognizer.recognize(stepContext.context);
-       console.log(luisResponse);
-		switch (stepContext.context.activity.text.toLowerCase()) {
-			case 'add skills':
+		let luisIntent = luisResponse.luisResult.prediction.topIntent;
+        console.log(JSON.stringify(luisResponse.luisResult.prediction));
+		switch (luisIntent) {
+			case 'Add Skills':
 				return await stepContext.beginDialog(skillsDialog);
-			case 'add certificates':
-				return await stepContext.beginDialog(AddCDialog);
+			case 'Add Certificates':
+				return await stepContext.beginDialog(AddCDialog, {
+					luisResult: true,
+					entities: luisResponse.luisResult.prediction.entities
+				});
 			case 'portfolio':
 				return await stepContext.beginDialog(portDialog);
 			default:

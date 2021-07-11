@@ -15,7 +15,7 @@ let user = require('./userProfile');
 const ChoicePromptDialog = 'ChoicePromptDialog';
 const NumberPromptDialog = 'NumberPromptDialog';
 const TextPromptDialog = 'TextPromptDialog';
-     
+
 const AddCDialogWF1 = 'AddCDialogWF1';
 class ADDCDialog extends ComponentDialog {
 	constructor(userState, conversationState) {
@@ -24,8 +24,8 @@ class ADDCDialog extends ComponentDialog {
 		if (!conversationState) throw new Error('conversation state required');
 		this.conversationState = conversationState;
 		this.userState = userState;
-		this.userProfileAccessor = this.userState.createProperty('UserProfileState');
-		
+		this.userProfileAccessor =
+			this.userState.createProperty('UserProfileState');
 
 		this.addDialog(new ChoicePrompt(ChoicePromptDialog));
 		this.addDialog(new NumberPrompt(NumberPromptDialog));
@@ -33,6 +33,7 @@ class ADDCDialog extends ComponentDialog {
 
 		this.addDialog(
 			new WaterfallDialog(AddCDialogWF1, [
+				this.preProcessEntities.bind(this),
 				this.CertificateInput.bind(this),
 				this.ProviderInput.bind(this),
 				this.sendConfirmation.bind(this),
@@ -40,8 +41,27 @@ class ADDCDialog extends ComponentDialog {
 		);
 
 		this.initialDialogId = AddCDialogWF1;
-	}   
+	}
 
+	async preProcessEntities(stepContext) {
+		try {
+			if (stepContext.options && stepContext.options.luisResult) {
+				console.log(stepContext.options.entities);
+				let numberEntities = stepContext.options.entities.number
+					? stepContext.options.entities.number[0]
+					: null;
+				let certificateNoEntities = stepContext.options.entities.CertificateName
+					? stepContext.options.entities.CertificateName[0][0]
+					: null;
+				let skillsEntities = stepContext.options.entities.number[0];
+
+				
+				return stepContext.next();
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
 	async CertificateInput(stepContext) {
 		await stepContext.context.sendActivity(
 			'Please enter your course details correctly !',
@@ -73,46 +93,46 @@ class ADDCDialog extends ComponentDialog {
 		userProfile.certificateNo = stepContext.values.certificateNum;
 		userProfile.certificateProvider = stepContext.values.Provider;
 
-		  //store data in object
+		//store data in object
 		user.certificates.push({
-			"CertificateNo": userProfile.certificateNo,
-			"Provider": userProfile.certificateProvider
+			CertificateNo: userProfile.certificateNo,
+			Provider: userProfile.certificateProvider,
 		});
-		  await stepContext.context.sendActivity({
-				attachments: [
-					CardFactory.adaptiveCard(
-						showCertificate(
-							userProfile.certificateNo,
-							userProfile.certificateProvider,
-						),
+		await stepContext.context.sendActivity({
+			attachments: [
+				CardFactory.adaptiveCard(
+					showCertificate(
+						userProfile.certificateNo,
+						userProfile.certificateProvider,
 					),
-				],
-		  });
+				),
+			],
+		});
 		return await stepContext.context.sendActivity({
-				attachments: [
-					CardFactory.heroCard(
-						'Here are some suggestions: ',
-						null,
-						CardFactory.actions([
-							{
-								type: 'imBack',
-								title: 'Portfolio',
-								value: 'Portfolio',
-							},
-							{
-								type: 'imBack',
-								title: 'Add Certificates',
-								value: 'Add Certificates',
-							},
-							{
-								type: 'imBack',
-								title: 'Add Skills',
-								value: 'Add Skills',
-							},
-						]),
-					),
-				],
-			});
+			attachments: [
+				CardFactory.heroCard(
+					'Here are some suggestions: ',
+					null,
+					CardFactory.actions([
+						{
+							type: 'imBack',
+							title: 'Portfolio',
+							value: 'Portfolio',
+						},
+						{
+							type: 'imBack',
+							title: 'Add Certificates',
+							value: 'Add Certificates',
+						},
+						{
+							type: 'imBack',
+							title: 'Add Skills',
+							value: 'Add Skills',
+						},
+					]),
+				),
+			],
+		});
 	}
 
 	async sendHelpSuggestions(stepContext) {
