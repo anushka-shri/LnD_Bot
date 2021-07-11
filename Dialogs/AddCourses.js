@@ -76,9 +76,9 @@ class CoursesDialog extends ComponentDialog {
 		let userProfile = await this.userProfileAccessor.get(stepContext.context);
 		console.log(userProfile);
 		await stepContext.context.sendActivity(
-			`Successfully enrolled in ${userProfile.courseName} course.`,
+			` ${userProfile.courseName} successfully added to your portfolio`,
 		);
-		await stepContext.context.sendActivity('May I help you any further?');
+		await stepContext.context.sendActivity('Here are some suggestions:');
 		return await stepContext.context.sendActivity({
 			attachments: [
 				CardFactory.heroCard(
