@@ -111,8 +111,7 @@ module.exports = {
 
 		return course;
 	},
-
-	myPortfolio: (user, certificateObj) => {
+    myPortfolio: (user, certificateObj) => {
 		return {
 			type: 'AdaptiveCard',
 			$schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
@@ -285,6 +284,63 @@ module.exports = {
 						},
 					],
 					separator: true,
+				},
+			],
+		};
+	},
+	showCourse: (courseName) => {
+		return {
+			type: 'AdaptiveCard',
+			$schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+			version: '1.3',
+			body: [
+				{
+					type: 'Container',
+					items: [
+						{
+							type: 'TextBlock',
+							wrap: true,
+							text: 'You have requested for the following course : ',
+							color: 'Accent',
+							weight: 'Bolder',
+						},
+					],
+					separator: true,
+				},
+				{
+					type: 'Container',
+					items: [
+						{
+							type: 'TextBlock',
+							wrap: true,
+							text: `${courseName}`,
+						},
+					],
+					separator: true,
+				},
+				{
+					type: 'Container',
+					items: [
+						{
+							type: 'ActionSet',
+							actions: [
+								{
+									type: 'Action.OpenUrl',
+									id: 'ExploreCourse',
+									title: 'Explore Course',
+									style: 'positive',
+									url: 'https://www.udemy.com/',
+									iconUrl: 'https://www.udemy.com/',
+								},
+								{
+									type: 'Action.Submit',
+									id: 'ApplyCourse',
+									title: 'Apply',
+									style: 'positive',
+								},
+							],
+						},
+					],
 				},
 			],
 		};

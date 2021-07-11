@@ -127,6 +127,11 @@ class ADDCDialog extends ComponentDialog {
 						},
 						{
 							type: 'imBack',
+							title: 'Courses',
+							value: 'Courses',
+						},
+						{
+							type: 'imBack',
 							title: 'Add Certificates',
 							value: 'Add Certificates',
 						},
@@ -155,6 +160,11 @@ class ADDCDialog extends ComponentDialog {
 							type: 'imBack',
 							title: 'Portfolio',
 							value: 'Portfolio',
+						},
+						{
+							type: 'imBack',
+							title: 'Courses',
+							value: 'Courses',
 						},
 						{
 							type: 'imBack',

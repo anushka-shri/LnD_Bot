@@ -61,6 +61,11 @@ class PortFolioDialog extends ComponentDialog {
 							},
 							{
 								type: 'imBack',
+								title: 'Courses',
+								value: 'Courses',
+							},
+							{
+								type: 'imBack',
 								title: 'Add Certificates',
 								value: 'Add Certificates',
 							},

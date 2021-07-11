@@ -17,6 +17,7 @@ const {
 const { ADDCDialog } = require('./AddCertificates');
 const { SkillsDialog } = require('./AddSkills');
 const { PortFolioDialog } = require('./Myportfolio');
+const { CoursesDialog } = require('./AddCourses');
 
 const parseMessage = 'parseMessage';
 
@@ -45,6 +46,7 @@ class RootDialog extends ComponentDialog {
 
 		this.addDialog(new ADDCDialog(userState, conversationState));
 		this.addDialog(new SkillsDialog(userState, conversationState));
+		this.addDialog(new CoursesDialog(userState, conversationState));
 		this.addDialog(new PortFolioDialog(userState, conversationState));
 		this.initialDialogId = parseMessage;
 	}
@@ -68,13 +70,15 @@ class RootDialog extends ComponentDialog {
 	async routeMessage(stepContext) {
 		// let luisResponse = await this.recognizer.recognize(stepContext.context);
 		// let luisIntent = luisResponse.luisResult.prediction.topIntent;
-        // console.log(JSON.stringify(luisResponse.luisResult.prediction));
+		// console.log(JSON.stringify(luisResponse.luisResult.prediction));
 		switch (stepContext.context.activity.text.toLowerCase()) {
 			case 'add skills':
 				return await stepContext.beginDialog(skillsDialog);
+			case 'courses':
+				return await stepContext.beginDialog('CoursesDialog');
 			case 'add certificates':
 				return await stepContext.beginDialog(AddCDialog);
-			case 'portfolio':
+            case 'portfolio':
 				return await stepContext.beginDialog(portDialog);
 			default:
 				await stepContext.context.sendActivity('Sorry I am still learning');
