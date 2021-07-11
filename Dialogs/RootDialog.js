@@ -1,12 +1,12 @@
 // for all conditional statements
-
-const {UserState, ConversationState } = require('botbuilder');
+const { UserState, ConversationState } = require('botbuilder');
 const {
 	ComponentDialog,
 	DialogSet,
 	DialogTurnStatus,
 	WaterfallDialog,
 } = require('botbuilder-dialogs');
+const { LuisRecognizer } = require('botbuilder-ai');
 
 const {
 	rootDialog,
@@ -15,11 +15,17 @@ const {
 	portDialog,
 } = require('../Constants/dialogIDs');
 const { ADDCDialog } = require('./AddCertificates');
-
 const { SkillsDialog } = require('./AddSkills');
 const { PortFolioDialog } = require('./Myportfolio');
 
 const parseMessage = 'parseMessage';
+
+const luisConfig = {
+	applicationId: 'd94d832b-37a3-496f-9806-66547af6ad15',
+	endpointKey: '7dba0b10cb3440b88cfead2f7b1c15e0',
+	endpoint:
+		'https://manipal-interns-luis-authoring.cognitiveservices.azure.com/',
+};
 
 class RootDialog extends ComponentDialog {
 	constructor(userState, conversationState) {
@@ -33,9 +39,13 @@ class RootDialog extends ComponentDialog {
 			new WaterfallDialog(parseMessage, [this.routeMessage.bind(this)]),
 		);
 
+		this.recognizer = new LuisRecognizer(luisConfig, {
+			apiVersion: 'v3',
+		});
+
 		this.addDialog(new ADDCDialog(userState, conversationState));
 		this.addDialog(new SkillsDialog(conversationState));
-		this.addDialog(new PortFolioDialog(userState,conversationState));
+		this.addDialog(new PortFolioDialog(userState, conversationState));
 		this.initialDialogId = parseMessage;
 	}
 
@@ -54,8 +64,10 @@ class RootDialog extends ComponentDialog {
 			console.log(err);
 		}
 	}
-     
+
 	async routeMessage(stepContext) {
+		let luisResponse = await this.recognizer.recognize(stepContext.context);
+       console.log(luisResponse);
 		switch (stepContext.context.activity.text.toLowerCase()) {
 			case 'add skills':
 				return await stepContext.beginDialog(skillsDialog);
@@ -71,4 +83,3 @@ class RootDialog extends ComponentDialog {
 }
 
 module.exports.RootDialog = RootDialog;
-      
