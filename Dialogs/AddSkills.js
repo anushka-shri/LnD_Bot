@@ -20,9 +20,11 @@ class SkillsDialog extends ComponentDialog {
 
 		if (!conversationState) throw new Error('conversation state required');
 		this.conversationState = conversationState;
+		// this.userProfileAccessor =
+		// 	this.userState.createProperty('UserProfileState');
 
-		this.applyLeaveStateAccessor =
-			this.conversationState.createProperty('ApplyLeaveState');
+		// this.applyLeaveStateAccessor =
+		// 	this.conversationState.createProperty('ApplyLeaveState');
 
 		this.addDialog(new ChoicePrompt(ChoicePromptDialog));
 		this.addDialog(new NumberPrompt(NumberPromptDialog));
@@ -33,7 +35,6 @@ class SkillsDialog extends ComponentDialog {
 				this.SkillsInput.bind(this),
 				this.ProviderInput.bind(this),
 				this.sendConfirmation.bind(this),
-				
 			]),
 		);
 
@@ -46,7 +47,6 @@ class SkillsDialog extends ComponentDialog {
 	}
 
 	async ProviderInput(stepContext) {
-
 		stepContext.values.skillsVal = stepContext.result;
 		await stepContext.context.sendActivity(
 			`${stepContext.values.skillsVal} added successfully`,
@@ -114,7 +114,7 @@ class SkillsDialog extends ComponentDialog {
 						{
 							type: 'imBack',
 							title: 'Add Skills',
-							value: 'Add Skills',
+							value: 'add skills',
 						},
 					]),
 				),

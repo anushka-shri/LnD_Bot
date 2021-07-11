@@ -21,7 +21,9 @@ class PortFolioDialog extends ComponentDialog {
 			this.userState.createProperty('UserProfileState');
 
 		this.addDialog(
-			new WaterfallDialog(portDialogWF1, [this.showPortFolio.bind(this)]),
+			new WaterfallDialog(portDialogWF1,
+				[this.showPortFolio.bind(this)]
+			),
 		);
 
 		this.initialDialogId = portDialogWF1;
@@ -74,6 +76,7 @@ class PortFolioDialog extends ComponentDialog {
 		} catch (err) {
 			console.log(err);
 		}
+		return await stepContext.endDialog();
 	}
 }
 

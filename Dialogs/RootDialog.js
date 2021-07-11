@@ -55,7 +55,7 @@ class RootDialog extends ComponentDialog {
 			dialogSet.add(this); // refers to current reference object
 			const dialogContext = await dialogSet.createContext(context); // hold specific context of that particular dialog
 			const results = await dialogContext.continueDialog(); //
-			if (results && results.status == DialogTurnStatus.empty) {
+			if (results.status === DialogTurnStatus.empty) {
 				await dialogContext.beginDialog(this.id);
 			} else {
 				console.log('dialog stack is empty');
@@ -66,17 +66,14 @@ class RootDialog extends ComponentDialog {
 	}
 
 	async routeMessage(stepContext) {
-		let luisResponse = await this.recognizer.recognize(stepContext.context);
-		let luisIntent = luisResponse.luisResult.prediction.topIntent;
-        console.log(JSON.stringify(luisResponse.luisResult.prediction));
-		switch (luisIntent) {
-			case 'Add Skills':
+		// let luisResponse = await this.recognizer.recognize(stepContext.context);
+		// let luisIntent = luisResponse.luisResult.prediction.topIntent;
+        // console.log(JSON.stringify(luisResponse.luisResult.prediction));
+		switch (stepContext.context.activity.text.toLowerCase()) {
+			case 'add skills':
 				return await stepContext.beginDialog(skillsDialog);
-			case 'Add Certificates':
-				return await stepContext.beginDialog(AddCDialog, {
-					luisResult: true,
-					entities: luisResponse.luisResult.prediction.entities
-				});
+			case 'add certificates':
+				return await stepContext.beginDialog(AddCDialog);
 			case 'portfolio':
 				return await stepContext.beginDialog(portDialog);
 			default:

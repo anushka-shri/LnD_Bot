@@ -33,7 +33,7 @@ class ADDCDialog extends ComponentDialog {
 
 		this.addDialog(
 			new WaterfallDialog(AddCDialogWF1, [
-				this.preProcessEntities.bind(this),
+				// this.preProcessEntities.bind(this),
 				this.CertificateInput.bind(this),
 				this.ProviderInput.bind(this),
 				this.sendConfirmation.bind(this),
@@ -43,25 +43,31 @@ class ADDCDialog extends ComponentDialog {
 		this.initialDialogId = AddCDialogWF1;
 	}
 
-	async preProcessEntities(stepContext) {
-		try {
-			if (stepContext.options && stepContext.options.luisResult) {
-				console.log(stepContext.options.entities);
-				let numberEntities = stepContext.options.entities.number
-					? stepContext.options.entities.number[0]
-					: null;
-				let certificateNoEntities = stepContext.options.entities.CertificateName
-					? stepContext.options.entities.CertificateName[0][0]
-					: null;
-				let skillsEntities = stepContext.options.entities.number[0];
+	// async preProcessEntities(stepContext) {
+	// 	try {
+	// 		if (stepContext.options && stepContext.options.luisResult) {
+	// 			console.log(stepContext.options.entities);
+	// 			let numberEntity = stepContext.options.entities.number
+	// 				? stepContext.options.entities.number[0]
+	// 				: null;
+	// 			let certificateNoEntity = stepContext.options.entities.CertificateName
+	// 				? stepContext.options.entities.CertificateName[0][0]
+	// 				: null;
+	// 			let skillsEntity = stepContext.options.entities.number[0];
 
-				
-				return stepContext.next();
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	}
+	// 			let certificateNoobj = {};
+	// 			// if (certificateNoEntity != null) {
+	// 			// 	certificateNoEntity.forEach((subentities, index) => {
+	// 			// 		if(subentities.type === )
+	// 			// 	})
+	// 			// }
+
+	// 			return stepContext.next();
+	// 		}
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// }
 	async CertificateInput(stepContext) {
 		await stepContext.context.sendActivity(
 			'Please enter your course details correctly !',
