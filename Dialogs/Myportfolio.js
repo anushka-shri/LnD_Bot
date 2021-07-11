@@ -3,7 +3,6 @@ const { ComponentDialog, WaterfallDialog } = require('botbuilder-dialogs');
 const { CardFactory } = require('botbuilder');
 const { portDialog } = require('../Constants/dialogIDs');
 
-
 const portDialogWF1 = 'portDialogWF1';
 
 let user = require('./userProfile');
@@ -21,9 +20,7 @@ class PortFolioDialog extends ComponentDialog {
 			this.userState.createProperty('UserProfileState');
 
 		this.addDialog(
-			new WaterfallDialog(portDialogWF1,
-				[this.showPortFolio.bind(this)]
-			),
+			new WaterfallDialog(portDialogWF1, [this.showPortFolio.bind(this)]),
 		);
 
 		this.initialDialogId = portDialogWF1;
@@ -33,7 +30,7 @@ class PortFolioDialog extends ComponentDialog {
 		await stepContext.context.sendActivity(
 			"Please wait while I'm fetching your details.",
 		);
-		
+
 		try {
 			let certificateObj = user.certificates.map((el) => {
 				return {
@@ -42,9 +39,16 @@ class PortFolioDialog extends ComponentDialog {
 				};
 			});
 
+			let skills = user.skills.map((el) => {
+				return {
+					title: JSON.stringify(el.skills),
+					value: el.Provider,
+				};
+			});
+
 			await stepContext.context.sendActivity({
 				attachments: [
-					CardFactory.adaptiveCard(myPortfolio(user, certificateObj)),
+					CardFactory.adaptiveCard(myPortfolio(user, certificateObj, skills)),
 				],
 			});
 

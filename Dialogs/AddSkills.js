@@ -42,19 +42,14 @@ class SkillsDialog extends ComponentDialog {
 	}
 
 	async SkillsInput(stepContext) {
-		await stepContext.context.sendActivity(
-			'Please enter your skills details'
-		);
-		return await stepContext.prompt(
-			TextPromptDialog,
-			`Enter Skill details :`
-		);
+		await stepContext.context.sendActivity('Please enter your skills details');
+		return await stepContext.prompt(TextPromptDialog, `Enter Skill details :`);
 	}
 
 	async ProviderInput(stepContext) {
-		stepContext.values.skillsVal = stepContext.result;
+		stepContext.values.skills = stepContext.result;
 		await stepContext.context.sendActivity(
-			`${stepContext.values.skillsVal} added successfully`,
+			`${stepContext.values.skills} added successfully`,
 		);
 
 		return await stepContext.prompt(
@@ -70,18 +65,18 @@ class SkillsDialog extends ComponentDialog {
 			stepContext.context,
 			{},
 		);
-		userProfile.skillsVal = stepContext.values.skillsVal;
+		userProfile.skills = stepContext.values.skills;
 		userProfile.skillsProvider = stepContext.values.Provider;
 
 		//store data in object
 		user.certificates.push({
-			skillsVal: userProfile.skillsVal,
+			skills: userProfile.skills,
 			Provider: userProfile.skillsProvider,
 		});
 		await stepContext.context.sendActivity({
 			attachments: [
 				CardFactory.adaptiveCard(
-					showSkills(userProfile.skillsVal, userProfile.skillsProvider),
+					showSkills(userProfile.skills, userProfile.skillsProvider),
 				),
 			],
 		});

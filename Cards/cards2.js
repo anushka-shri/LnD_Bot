@@ -127,7 +127,7 @@ module.exports = {
 
 		return course;
 	},
-    myPortfolio: (user, certificateObj) => {
+	myPortfolio: (user, certificateObj, skills) => {
 		return {
 			type: 'AdaptiveCard',
 			$schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
@@ -154,7 +154,7 @@ module.exports = {
 						{
 							type: 'TextBlock',
 							wrap: true,
-							text: 'Courses',
+							text: 'Courses Added',
 							horizontalAlignment: 'Left',
 							weight: 'Bolder',
 						},
@@ -178,7 +178,7 @@ module.exports = {
 						{
 							type: 'TextBlock',
 							wrap: true,
-							text: 'Certificate',
+							text: 'Certificates Added',
 							horizontalAlignment: 'Left',
 							weight: 'Bolder',
 						},
@@ -190,6 +190,28 @@ module.exports = {
 						{
 							type: 'FactSet',
 							facts: certificateObj,
+						},
+					],
+				},
+				{
+					type: 'Container',
+					separator: true,
+					items: [
+						{
+							type: 'TextBlock',
+							wrap: true,
+							text: 'Skills Added',
+							horizontalAlignment: 'Left',
+							weight: 'Bolder',
+						},
+					],
+				},
+				{
+					type: 'Container',
+					items: [
+						{
+							type: 'FactSet',
+							facts: skills,
 						},
 					],
 				},
@@ -250,7 +272,7 @@ module.exports = {
 			],
 		};
 	},
-	showSkills: (skillsVal, Prov) => {
+	showSkills: (skills, Prov) => {
 		return {
 			type: 'AdaptiveCard',
 			$schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
@@ -270,7 +292,7 @@ module.exports = {
 						{
 							type: 'TextBlock',
 							wrap: true,
-							text: `Skills: ${skillsVal}`,
+							text: `Skills: ${skills}`,
 							size: 'Large',
 						},
 						{
@@ -323,7 +345,7 @@ module.exports = {
 					],
 					separator: true,
 				},
-				
+
 				{
 					type: 'Container',
 					items: [

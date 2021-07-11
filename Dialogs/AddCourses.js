@@ -108,7 +108,9 @@ class CoursesDialog extends ComponentDialog {
 					]),
 				),
 			],
-		});
+        });
+        
+        return await stepContext.endDialog();
 	}
 }
 
