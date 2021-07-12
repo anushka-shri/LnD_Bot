@@ -1,5 +1,3 @@
-// for all conditional statements
-const { UserState, ConversationState } = require('botbuilder');
 const {
 	ComponentDialog,
 	DialogSet,
@@ -68,17 +66,20 @@ class RootDialog extends ComponentDialog {
 	}
 
 	async routeMessage(stepContext) {
-		// let luisResponse = await this.recognizer.recognize(stepContext.context);
-		// let luisIntent = luisResponse.luisResult.prediction.topIntent;
-		// console.log(JSON.stringify(luisResponse.luisResult.prediction));
-		switch (stepContext.context.activity.text.toLowerCase()) {
-			case 'add skills':
+		let luisResponse = await this.recognizer.recognize(stepContext.context);
+		let luisIntent = luisResponse.luisResult.prediction.topIntent;
+		console.log(JSON.stringify(luisResponse.luisResult.prediction));
+		switch (luisIntent) {
+			case 'Add Skills':
 				return await stepContext.beginDialog(skillsDialog);
-			case 'courses':
+			case 'Courses':
 				return await stepContext.beginDialog('CoursesDialog');
-			case 'add certificates':
-				return await stepContext.beginDialog(AddCDialog);
-            case 'portfolio':
+			case 'Add Certificates':
+				return await stepContext.beginDialog(AddCDialog, {
+					luisResult: true,
+					entities: luisResponse.luisResult.prediction.entities,
+				});
+			case 'Portfolio':
 				return await stepContext.beginDialog(portDialog);
 			default:
 				await stepContext.context.sendActivity('Sorry I am still learning');
@@ -86,5 +87,5 @@ class RootDialog extends ComponentDialog {
 		return await stepContext.endDialog();
 	}
 }
-
+     
 module.exports.RootDialog = RootDialog;

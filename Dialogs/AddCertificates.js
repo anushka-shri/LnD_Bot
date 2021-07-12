@@ -2,7 +2,6 @@ const {
 	ComponentDialog,
 	WaterfallDialog,
 	ChoicePrompt,
-	ChoiceFactory,
 	NumberPrompt,
 	TextPrompt,
 } = require('botbuilder-dialogs');
@@ -33,7 +32,7 @@ class ADDCDialog extends ComponentDialog {
 
 		this.addDialog(
 			new WaterfallDialog(AddCDialogWF1, [
-				// this.preProcessEntities.bind(this),
+				this.preProcessEntities.bind(this),
 				this.CertificateInput.bind(this),
 				this.ProviderInput.bind(this),
 				this.sendConfirmation.bind(this),
@@ -43,31 +42,31 @@ class ADDCDialog extends ComponentDialog {
 		this.initialDialogId = AddCDialogWF1;
 	}
 
-	// async preProcessEntities(stepContext) {
-	// 	try {
-	// 		if (stepContext.options && stepContext.options.luisResult) {
-	// 			console.log(stepContext.options.entities);
-	// 			let numberEntity = stepContext.options.entities.number
-	// 				? stepContext.options.entities.number[0]
-	// 				: null;
-	// 			let certificateNoEntity = stepContext.options.entities.CertificateName
-	// 				? stepContext.options.entities.CertificateName[0][0]
-	// 				: null;
-	// 			let skillsEntity = stepContext.options.entities.number[0];
+	async preProcessEntities(stepContext) {
+		try {
+			if(stepContext.options && stepContext.options.luisResult) {
+				
+				let numberEntity = stepContext.options.entities.number
+					? stepContext.options.entities.number[0]
+					: null;
+				console.log(numberEntity);
+				let certificateNameEntity = stepContext.options.entities.CertificateName
+					? stepContext.options.entities.CertificateName[0]
+					: null;
+				console.log('heelloo',certificateNameEntity);
+                // console.log(JSON.stringify(stepContext.options.Entities));
+				stepContext.values.Entities = {
+					numberEntity,
+					certificateNameEntity,
+				};
 
-	// 			let certificateNoobj = {};
-	// 			// if (certificateNoEntity != null) {
-	// 			// 	certificateNoEntity.forEach((subentities, index) => {
-	// 			// 		if(subentities.type === )
-	// 			// 	})
-	// 			// }
+				return stepContext.next();
+			}
+		} catch (error) {
+			console.log(error);
+		}      
+	}     
 
-	// 			return stepContext.next();
-	// 		}
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// }
 	async CertificateInput(stepContext) {
 		await stepContext.context.sendActivity(
 			'Please enter your course details correctly !',
@@ -79,6 +78,7 @@ class ADDCDialog extends ComponentDialog {
 	}
 
 	async ProviderInput(stepContext) {
+		
 		stepContext.values.certificateNum = stepContext.result;
 		await stepContext.context.sendActivity(
 			`${stepContext.values.certificateNum} added successfully`,

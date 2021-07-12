@@ -1,15 +1,12 @@
 const { MessageFactory, CardFactory } = require('botbuilder');
 const {
 	ComponentDialog,
-	DialogSet,
-	DialogTurnStatus,
 	WaterfallDialog,
 	NumberPrompt,
 	TextPrompt,
 	Dialog,
 } = require('botbuilder-dialogs');
 
-const { Channels } = require('botbuilder-core');
 const { coursesForm } = require('../cards/cards2');
 const { showCourse } = require('../cards/cards2');
 let user = require('./userProfile');

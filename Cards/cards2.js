@@ -155,6 +155,7 @@ module.exports = {
 							type: 'TextBlock',
 							wrap: true,
 							text: 'Courses Added',
+							size: 'Medium',
 							horizontalAlignment: 'Left',
 							weight: 'Bolder',
 						},
@@ -167,6 +168,7 @@ module.exports = {
 						{
 							type: 'TextBlock',
 							wrap: true,
+							color: 'Accent',
 							text: `${user.courses}`,
 						},
 					],
@@ -179,6 +181,7 @@ module.exports = {
 							type: 'TextBlock',
 							wrap: true,
 							text: 'Certificates Added',
+							size: 'Medium',
 							horizontalAlignment: 'Left',
 							weight: 'Bolder',
 						},
@@ -189,6 +192,7 @@ module.exports = {
 					items: [
 						{
 							type: 'FactSet',
+							color: 'Accent',
 							facts: certificateObj,
 						},
 					],
@@ -200,7 +204,8 @@ module.exports = {
 						{
 							type: 'TextBlock',
 							wrap: true,
-							text: 'Skills Added',
+							text: 'Skills Added:-',
+							size: 'Medium',
 							horizontalAlignment: 'Left',
 							weight: 'Bolder',
 						},
@@ -211,6 +216,7 @@ module.exports = {
 					items: [
 						{
 							type: 'FactSet',
+							color: 'Accent',
 							facts: `${skills}`,
 						},
 					],
