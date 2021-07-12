@@ -71,21 +71,30 @@ class RootDialog extends ComponentDialog {
 		console.log(JSON.stringify(luisResponse.luisResult.prediction));
 		switch (luisIntent) {
 			case 'Add Skills':
-				return await stepContext.beginDialog(skillsDialog);
+				return await stepContext.beginDialog(skillsDialog, {
+					luisResult: true,
+					entities: luisResponse.luisResult.prediction.entities,
+				});
 			case 'Courses':
-				return await stepContext.beginDialog('CoursesDialog');
+				return await stepContext.beginDialog('CoursesDialog', {
+					luisResult: true,
+					entities: luisResponse.luisResult.prediction.entities,
+				});
 			case 'Add Certificates':
 				return await stepContext.beginDialog(AddCDialog, {
 					luisResult: true,
 					entities: luisResponse.luisResult.prediction.entities,
 				});
-			case 'Portfolio':
-				return await stepContext.beginDialog(portDialog);
+			case 'Portfolio':   
+				return await stepContext.beginDialog(portDialog, {
+					luisResult: true,
+					entities: luisResponse.luisResult.prediction.entities,
+				});
 			default:
 				await stepContext.context.sendActivity('Sorry I am still learning');
 		}
 		return await stepContext.endDialog();
 	}
 }
-     
+
 module.exports.RootDialog = RootDialog;

@@ -1,4 +1,4 @@
-const { MessageFactory, CardFactory } = require('botbuilder');
+const { CardFactory } = require('botbuilder');
 const {
 	ComponentDialog,
 	WaterfallDialog,
@@ -30,6 +30,7 @@ class CoursesDialog extends ComponentDialog {
 
 		this.addDialog(
 			new WaterfallDialog(WATERFALL_DIALOG, [
+				this.preProcessEntities.bind(this),
 				this.showForm.bind(this),
 				this.displayCourse.bind(this),
 				this.applyCourse.bind(this),
@@ -37,6 +38,24 @@ class CoursesDialog extends ComponentDialog {
 		);
 
 		this.initialDialogId = WATERFALL_DIALOG;
+	}
+
+	async preProcessEntities(stepContext) {
+		try {
+			if (stepContext.options && stepContext.options.luisResult) {
+				let courseNameEntity = stepContext.options.entities.CourseName
+					? stepContext.options.entities.CourseName[0]
+					: null;
+
+				stepContext.values.Entities = {
+					courseNameEntity,
+				};
+
+				return stepContext.next();
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	async showForm(stepContext) {
@@ -76,7 +95,7 @@ class CoursesDialog extends ComponentDialog {
 			` ${userProfile.courseName} successfully added to your portfolio`,
 		);
 		await stepContext.context.sendActivity('Here are some suggestions:');
-		 await stepContext.context.sendActivity({
+		await stepContext.context.sendActivity({
 			attachments: [
 				CardFactory.heroCard(
 					'Here are some suggestions: ',
@@ -105,9 +124,9 @@ class CoursesDialog extends ComponentDialog {
 					]),
 				),
 			],
-        });
-        
-        return await stepContext.endDialog();
+		});
+
+		return await stepContext.endDialog();
 	}
 }
 

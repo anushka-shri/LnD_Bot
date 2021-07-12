@@ -44,17 +44,15 @@ class ADDCDialog extends ComponentDialog {
 
 	async preProcessEntities(stepContext) {
 		try {
-			if(stepContext.options && stepContext.options.luisResult) {
-				
+			if (stepContext.options && stepContext.options.luisResult) {
 				let numberEntity = stepContext.options.entities.number
 					? stepContext.options.entities.number[0]
 					: null;
-				console.log(numberEntity);
+
 				let certificateNameEntity = stepContext.options.entities.CertificateName
 					? stepContext.options.entities.CertificateName[0]
 					: null;
-				console.log('heelloo',certificateNameEntity);
-                // console.log(JSON.stringify(stepContext.options.Entities));
+
 				stepContext.values.Entities = {
 					numberEntity,
 					certificateNameEntity,
@@ -64,8 +62,8 @@ class ADDCDialog extends ComponentDialog {
 			}
 		} catch (error) {
 			console.log(error);
-		}      
-	}     
+		}
+	}
 
 	async CertificateInput(stepContext) {
 		await stepContext.context.sendActivity(
@@ -78,7 +76,6 @@ class ADDCDialog extends ComponentDialog {
 	}
 
 	async ProviderInput(stepContext) {
-		
 		stepContext.values.certificateNum = stepContext.result;
 		await stepContext.context.sendActivity(
 			`${stepContext.values.certificateNum} added successfully`,

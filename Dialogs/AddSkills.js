@@ -32,6 +32,7 @@ class SkillsDialog extends ComponentDialog {
 
 		this.addDialog(
 			new WaterfallDialog(skillsDialogWF1, [
+				this.preProcessEntities.bind(this),
 				this.SkillsInput.bind(this),
 				this.ProviderInput.bind(this),
 				this.sendConfirmation.bind(this),
@@ -39,6 +40,24 @@ class SkillsDialog extends ComponentDialog {
 		);
 
 		this.initialDialogId = skillsDialogWF1;
+	}
+
+	async preProcessEntities(stepContext) {
+		try {
+			if (stepContext.options && stepContext.options.luisResult) {
+				let skillsEntity = stepContext.options.entities.Skills
+					? stepContext.options.entities.Skills[0]
+					: null;
+
+				stepContext.values.Entities = {
+					skillsEntity,
+				};
+
+				return stepContext.next();
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	async SkillsInput(stepContext) {

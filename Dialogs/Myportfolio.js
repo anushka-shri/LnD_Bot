@@ -19,10 +19,31 @@ class PortFolioDialog extends ComponentDialog {
 			this.userState.createProperty('UserProfileState');
 
 		this.addDialog(
-			new WaterfallDialog(portDialogWF1, [this.showPortFolio.bind(this)]),
+			new WaterfallDialog(portDialogWF1, [
+				this.preProcessEntities.bind(this),
+				this.showPortFolio.bind(this),
+			]),
 		);
 
 		this.initialDialogId = portDialogWF1;
+	}
+
+	async preProcessEntities(stepContext) {
+		try {
+			if (stepContext.options && stepContext.options.luisResult) {
+				let ViewProfolioEntity = stepContext.options.entities.ViewProfolio
+					? stepContext.options.entities.number[0]
+					: null;
+
+				stepContext.values.Entities = {
+					ViewProfolioEntity,
+				};
+
+				return stepContext.next();
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	async showPortFolio(stepContext) {
