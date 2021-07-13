@@ -160,6 +160,19 @@ class ADDCDialog extends ComponentDialog {
 				],
 			});
 		} else {
+			let userProfile = await this.userProfileAccessor.get(
+				stepContext.context,
+				{},
+			);
+
+			(userProfile.certificateNo = stepContext.values.Entities.numberEntity),
+				(userProfile.certificateProvider =
+					stepContext.values.Entities.certificateNameEntity),
+				//store data in object
+				user.certificates.push({
+					CertificateNo: userProfile.certificateNo,
+					Provider: userProfile.certificateProvider,
+				});
 			await stepContext.context.sendActivity({
 				attachments: [
 					CardFactory.adaptiveCard(
