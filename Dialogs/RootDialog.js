@@ -70,8 +70,8 @@ class RootDialog extends ComponentDialog {
 		let luisIntent = luisResponse.luisResult.prediction.topIntent;
 		console.log(JSON.stringify(luisResponse.luisResult.prediction));
 		switch (luisIntent) {
-			case 'Add Skills':
-				return await stepContext.beginDialog(skillsDialog, {
+			case 'Portfolio':
+				return await stepContext.beginDialog(portDialog, {
 					luisResult: true,
 					entities: luisResponse.luisResult.prediction.entities,
 				});
@@ -85,11 +85,13 @@ class RootDialog extends ComponentDialog {
 					luisResult: true,
 					entities: luisResponse.luisResult.prediction.entities,
 				});
-			case 'Portfolio':   
-				return await stepContext.beginDialog(portDialog, {
+
+			case 'Add Skills':
+				return await stepContext.beginDialog(skillsDialog, {
 					luisResult: true,
 					entities: luisResponse.luisResult.prediction.entities,
 				});
+
 			default:
 				await stepContext.context.sendActivity('Sorry I am still learning');
 		}

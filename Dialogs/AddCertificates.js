@@ -66,81 +66,141 @@ class ADDCDialog extends ComponentDialog {
 	}
 
 	async CertificateInput(stepContext) {
-		await stepContext.context.sendActivity(
-			'Please enter your course details correctly !',
-		);
-		return await stepContext.prompt(
-			NumberPromptDialog,
-			`Enter Certificate No. :`,
-		);
+		if (
+			stepContext.values.Entities.numberEntity &&
+			stepContext.values.Entities.certificateNameEntity == null
+		) {
+			await stepContext.context.sendActivity(
+				'Please enter your course details correctly !',
+			);
+			return await stepContext.prompt(
+				NumberPromptDialog,
+				`Enter Certificate No. :`,
+			);
+		} else {
+			return await stepContext.next();
+		}
 	}
 
 	async ProviderInput(stepContext) {
-		stepContext.values.certificateNum = stepContext.result;
-		await stepContext.context.sendActivity(
-			`${stepContext.values.certificateNum} added successfully`,
-		);
+		if (
+			stepContext.values.Entities.numberEntity &&
+			stepContext.values.Entities.certificateNameEntity == null
+		) {
+			stepContext.values.certificateNum = stepContext.result;
+			await stepContext.context.sendActivity(
+				`${stepContext.values.certificateNum} added successfully`,
+			);
 
-		return await stepContext.prompt(
-			TextPromptDialog,
-			'Please enter your course provider !',
-		);
+			return await stepContext.prompt(
+				TextPromptDialog,
+				'Please enter your course provider !',
+			);
+		} else {
+			return await stepContext.next();
+		}
 	}
 
 	async sendConfirmation(stepContext) {
-		stepContext.values.Provider = stepContext.result;
-		let userProfile = await this.userProfileAccessor.get(
-			stepContext.context,
-			{},
-		);
-		userProfile.certificateNo = stepContext.values.certificateNum;
-		userProfile.certificateProvider = stepContext.values.Provider;
+		if (
+			stepContext.values.Entities.numberEntity &&
+			stepContext.values.Entities.certificateNameEntity == null
+		) {
+			stepContext.values.Provider = stepContext.result;
+			let userProfile = await this.userProfileAccessor.get(
+				stepContext.context,
+				{},
+			);
+			userProfile.certificateNo = stepContext.values.certificateNum;
+			userProfile.certificateProvider = stepContext.values.Provider;
 
-		//store data in object
-		user.certificates.push({
-			CertificateNo: userProfile.certificateNo,
-			Provider: userProfile.certificateProvider,
-		});
-		await stepContext.context.sendActivity({
-			attachments: [
-				CardFactory.adaptiveCard(
-					showCertificate(
-						userProfile.certificateNo,
-						userProfile.certificateProvider,
+			//store data in object
+			user.certificates.push({
+				CertificateNo: userProfile.certificateNo,
+				Provider: userProfile.certificateProvider,
+			});
+			await stepContext.context.sendActivity({
+				attachments: [
+					CardFactory.adaptiveCard(
+						showCertificate(
+							userProfile.certificateNo,
+							userProfile.certificateProvider,
+						),
 					),
-				),
-			],
-		});
-		return await stepContext.context.sendActivity({
-			attachments: [
-				CardFactory.heroCard(
-					'Here are some suggestions: ',
-					null,
-					CardFactory.actions([
-						{
-							type: 'imBack',
-							title: 'Portfolio',
-							value: 'Portfolio',
-						},
-						{
-							type: 'imBack',
-							title: 'Courses',
-							value: 'Courses',
-						},
-						{
-							type: 'imBack',
-							title: 'Add Certificates',
-							value: 'Add Certificates',
-						},
-						{
-							type: 'imBack',
-							title: 'Add Skills',
-							value: 'Add Skills',
-						},
-					]),
-				),
-			],
-		});
+				],
+			});
+			return await stepContext.context.sendActivity({
+				attachments: [
+					CardFactory.heroCard(
+						'Here are some suggestions: ',
+						null,
+						CardFactory.actions([
+							{
+								type: 'imBack',
+								title: 'Portfolio',
+								value: 'Portfolio',
+							},
+							{
+								type: 'imBack',
+								title: 'Courses',
+								value: 'Courses',
+							},
+							{
+								type: 'imBack',
+								title: 'Add Certificates',
+								value: 'Add Certificates',
+							},
+							{
+								type: 'imBack',
+								title: 'Add Skills',
+								value: 'Add Skills',
+							},
+						]),
+					),
+				],
+			});
+		} else {
+			await stepContext.context.sendActivity({
+				attachments: [
+					CardFactory.adaptiveCard(
+						showCertificate(
+							stepContext.values.Entities.numberEntity,
+							stepContext.values.Entities.certificateNameEntity,
+						),
+					),
+				],
+			});
+			return await stepContext.context.sendActivity({
+				attachments: [
+					CardFactory.heroCard(
+						'Here are some suggestions: ',
+						null,
+						CardFactory.actions([
+							{
+								type: 'imBack',
+								title: 'Portfolio',
+								value: 'Portfolio',
+							},
+							{
+								type: 'imBack',
+								title: 'Courses',
+								value: 'Courses',
+							},
+							{
+								type: 'imBack',
+								title: 'Add Certificates',
+								value: 'Add Certificates',
+							},
+							{
+								type: 'imBack',
+								title: 'Add Skills',
+								value: 'Add Skills',
+							},
+						]),
+					),
+				],
+			});
+		}
 	}
 
 	async sendHelpSuggestions(stepContext) {
