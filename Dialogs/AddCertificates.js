@@ -215,9 +215,7 @@ class ADDCDialog extends ComponentDialog {
 			});
 		}
 		return await stepContext.endDialog();
-	}     
-
-
+	}
 }
 
 module.exports.ADDCDialog = ADDCDialog;

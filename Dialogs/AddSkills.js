@@ -126,8 +126,7 @@ class SkillsDialog extends ComponentDialog {
 				],
 			});
 			return await stepContext.endDialog();
-		}
-		else {
+		} else {
 			await stepContext.context.sendActivity(
 				`${stepContext.values.Entities.skillsEntity} added successfully`,
 			);
