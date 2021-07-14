@@ -217,7 +217,7 @@ module.exports = {
 						{
 							type: 'FactSet',
 							color: 'Accent',
-							facts: `${skills}`,
+							facts: skills
 						},
 					],
 				},
@@ -278,7 +278,7 @@ module.exports = {
 			],
 		};
 	},
-	showSkills: (skills, Prov) => {
+	showSkills: (skills) => {
 		return {
 			type: 'AdaptiveCard',
 			$schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
@@ -287,7 +287,7 @@ module.exports = {
 				{
 					type: 'TextBlock',
 					wrap: true,
-					text: 'Your Request for adding the certificate with  :-\n',
+					text: 'Your Request for adding:-\n',
 					fontType: 'Default',
 					size: 'Medium',
 					color: 'Accent',
@@ -301,12 +301,7 @@ module.exports = {
 							text: `Skills: ${skills}`,
 							size: 'Large',
 						},
-						{
-							type: 'TextBlock',
-							wrap: true,
-							text: `Provider name: ${Prov}`,
-							size: 'Large',
-						},
+						
 					],
 					separator: true,
 				},
@@ -320,7 +315,7 @@ module.exports = {
 								{
 									type: 'TextBlock',
 									wrap: true,
-									text: 'has been successfully added.',
+									text: 'has been successfull.',
 									size: 'Medium',
 									color: 'Accent',
 								},

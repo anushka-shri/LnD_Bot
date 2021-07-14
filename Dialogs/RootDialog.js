@@ -13,7 +13,7 @@ const {
 	portDialog,
 } = require('../Constants/dialogIDs');
 const { ADDCDialog } = require('./AddCertificates');
-const { SkillsDialog } = require('./AddSkills');
+const { SkillsDialog } = require('./AddSkills.js');
 const { PortFolioDialog } = require('./Myportfolio');
 const { CoursesDialog } = require('./AddCourses');
 
@@ -21,7 +21,7 @@ const parseMessage = 'parseMessage';
 
 const luisConfig = {
 	applicationId: 'd94d832b-37a3-496f-9806-66547af6ad15',
-	endpointKey: '7dba0b10cb3440b88cfead2f7b1c15e0',
+	endpointKey: '317ef520ad4b42149b2bf25394829cb2',
 	endpoint:
 		'https://manipal-interns-luis-authoring.cognitiveservices.azure.com/',
 };
@@ -55,7 +55,7 @@ class RootDialog extends ComponentDialog {
 			dialogSet.add(this); // refers to current reference object
 			const dialogContext = await dialogSet.createContext(context); // hold specific context of that particular dialog
 			const results = await dialogContext.continueDialog(); //
-			if (results.status === DialogTurnStatus.empty) {
+			if(results.status === DialogTurnStatus.empty) {
 				await dialogContext.beginDialog(this.id);
 			} else {
 				console.log('dialog stack is empty');
@@ -70,8 +70,13 @@ class RootDialog extends ComponentDialog {
 		let luisIntent = luisResponse.luisResult.prediction.topIntent;
 		console.log(JSON.stringify(luisResponse.luisResult.prediction));
 		switch (luisIntent) {
-			case 'Portfolio':
-				return await stepContext.beginDialog(portDialog, {
+			case 'Add Certificates':
+				return await stepContext.beginDialog(AddCDialog, {
+					luisResult: true,
+					entities: luisResponse.luisResult.prediction.entities,
+				});
+			case 'Add Skills':
+				return await stepContext.beginDialog(skillsDialog, {
 					luisResult: true,
 					entities: luisResponse.luisResult.prediction.entities,
 				});
@@ -80,14 +85,8 @@ class RootDialog extends ComponentDialog {
 					luisResult: true,
 					entities: luisResponse.luisResult.prediction.entities,
 				});
-			case 'Add Certificates':
-				return await stepContext.beginDialog(AddCDialog, {
-					luisResult: true,
-					entities: luisResponse.luisResult.prediction.entities,
-				});
-
-			case 'Add Skills':
-				return await stepContext.beginDialog(skillsDialog, {
+			case 'Portfolio':
+				return await stepContext.beginDialog(portDialog, {
 					luisResult: true,
 					entities: luisResponse.luisResult.prediction.entities,
 				});

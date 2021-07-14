@@ -1,11 +1,11 @@
 const { ComponentDialog, WaterfallDialog } = require('botbuilder-dialogs');
 const { CardFactory } = require('botbuilder');
-const { portDialog } = require('../Constants/dialogIDs');
-
+const { portDialog } = require('../Constants/dialogIDs.js');
+const { myPortfolio } = require('../cards/cards2');
 const portDialogWF1 = 'portDialogWF1';
 
 let user = require('./userProfile');
-const { myPortfolio } = require('../cards/cards2');
+
 
 class PortFolioDialog extends ComponentDialog {
 	constructor(userState, conversationState) {

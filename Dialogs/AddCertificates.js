@@ -183,7 +183,7 @@ class ADDCDialog extends ComponentDialog {
 					),
 				],
 			});
-			return await stepContext.context.sendActivity({
+			await stepContext.context.sendActivity({
 				attachments: [
 					CardFactory.heroCard(
 						'Here are some suggestions: ',
@@ -214,45 +214,10 @@ class ADDCDialog extends ComponentDialog {
 				],
 			});
 		}
-	}
-
-	async sendHelpSuggestions(stepContext) {
-		await stepContext.context.sendActivity(
-			'hello i can help you,please apply leave or you want to check your leave status',
-		);
-		await stepContext.context.sendActivity({
-			attachments: [
-				CardFactory.heroCard(
-					'Here are some suggestions: ',
-					null,
-					CardFactory.actions([
-						{
-							type: 'imBack',
-							title: 'Portfolio',
-							value: 'Portfolio',
-						},
-						{
-							type: 'imBack',
-							title: 'Courses',
-							value: 'Courses',
-						},
-						{
-							type: 'imBack',
-							title: 'Add Certificates',
-							value: 'Add Certificates',
-						},
-						{
-							type: 'imBack',
-							title: 'Add Skills',
-							value: 'add skills',
-						},
-					]),
-				),
-			],
-		});
-
 		return await stepContext.endDialog();
-	}
+	}     
+
+
 }
 
 module.exports.ADDCDialog = ADDCDialog;

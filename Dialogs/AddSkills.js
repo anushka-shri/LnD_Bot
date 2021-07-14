@@ -7,7 +7,7 @@ const {
 } = require('botbuilder-dialogs');
 
 const { CardFactory } = require('botbuilder');
-const { skillsDialog } = require('../Constants/dialogIDs');
+const { skillsDialog } = require('../Constants/dialogIDs.js');
 const { showSkills } = require('../cards/cards2');
 let user = require('./userProfile');
 
@@ -16,6 +16,7 @@ const NumberPromptDialog = 'NumberPromptDialog';
 const TextPromptDialog = 'TextPromptDialog';
 
 const skillsDialogWF1 = 'skillsDialogWF1';
+
 class SkillsDialog extends ComponentDialog {
 	constructor(userState, conversationState) {
 		super(skillsDialog);
@@ -34,7 +35,6 @@ class SkillsDialog extends ComponentDialog {
 			new WaterfallDialog(skillsDialogWF1, [
 				this.preProcessEntities.bind(this),
 				this.SkillsInput.bind(this),
-				this.ProviderInput.bind(this),
 				this.sendConfirmation.bind(this),
 			]),
 		);
@@ -45,8 +45,8 @@ class SkillsDialog extends ComponentDialog {
 	async preProcessEntities(stepContext) {
 		try {
 			if (stepContext.options && stepContext.options.luisResult) {
-				let skillsEntity = stepContext.options.entities.Skills
-					? stepContext.options.entities.Skills[0]
+				let skillsEntity = stepContext.options.entities.SkillsName
+					? stepContext.options.entities.SkillsName[0]
 					: null;
 
 				stepContext.values.Entities = {
@@ -61,112 +61,125 @@ class SkillsDialog extends ComponentDialog {
 	}
 
 	async SkillsInput(stepContext) {
-		await stepContext.context.sendActivity('Please enter your skills details');
-		return await stepContext.prompt(TextPromptDialog, `Enter Skill details :`);
-	}
-
-	async ProviderInput(stepContext) {
-		stepContext.values.skills = stepContext.result;
-		await stepContext.context.sendActivity(
-			`${stepContext.values.skills} added successfully`,
-		);
-
-		return await stepContext.prompt(
-			TextPromptDialog,
-			'Please enter your skills provider !',
-		);
+		if (stepContext.values.Entities.skillsEntity == null) {
+			await stepContext.context.sendActivity(
+				'Please enter your skills details',
+			);
+			return await stepContext.prompt(
+				TextPromptDialog,
+				`Enter Skill details :`,
+			);
+		} else {
+			return await stepContext.next();
+		}
 	}
 
 	async sendConfirmation(stepContext) {
-		stepContext.values.Provider = stepContext.result;
+		if (stepContext.values.Entities.skillsEntity == null) {
+			stepContext.values.skills = stepContext.result;
+			await stepContext.context.sendActivity(
+				`${stepContext.values.skills} added successfully`,
+			);
 
-		let userProfile = await this.userProfileAccessor.get(
-			stepContext.context,
-			{},
-		);
-		userProfile.skills = stepContext.values.skills;
-		userProfile.skillsProvider = stepContext.values.Provider;
+			let userProfile = await this.userProfileAccessor.get(
+				stepContext.context,
+				{},
+			);
+			userProfile.skills = stepContext.values.skills;
 
-		//store data in object
-		user.certificates.push({
-			skills: userProfile.skills,
-			Provider: userProfile.skillsProvider,
-		});
-		await stepContext.context.sendActivity({
-			attachments: [
-				CardFactory.adaptiveCard(
-					showSkills(userProfile.skills, userProfile.skillsProvider),
-				),
-			],
-		});
+			//store data in object
+			user.skills.push({
+				skills: userProfile.skills,
+			});
+			await stepContext.context.sendActivity({
+				attachments: [CardFactory.adaptiveCard(showSkills(userProfile.skills))],
+			});
 
-		await stepContext.context.sendActivity({
-			attachments: [
-				CardFactory.heroCard(
-					'Here are some suggestions: ',
-					null,
-					CardFactory.actions([
-						{
-							type: 'imBack',
-							title: 'Portfolio',
-							value: 'Portfolio',
-						},
-						{
-							type: 'imBack',
-							title: 'Courses',
-							value: 'Courses',
-						},
-						{
-							type: 'imBack',
-							title: 'Add Certificates',
-							value: 'Add Certificates',
-						},
-						{
-							type: 'imBack',
-							title: 'Add Skills',
-							value: 'Add Skills',
-						},
-					]),
-				),
-			],
-		});
-	}
+			await stepContext.context.sendActivity({
+				attachments: [
+					CardFactory.heroCard(
+						'Here are some suggestions: ',
+						null,
+						CardFactory.actions([
+							{
+								type: 'imBack',
+								title: 'Portfolio',
+								value: 'Portfolio',
+							},
+							{
+								type: 'imBack',
+								title: 'Courses',
+								value: 'Courses',
+							},
+							{
+								type: 'imBack',
+								title: 'Add Certificates',
+								value: 'Add Certificates',
+							},
+							{
+								type: 'imBack',
+								title: 'Add Skills',
+								value: 'Add Skills',
+							},
+						]),
+					),
+				],
+			});
+			return await stepContext.endDialog();
+		}
+		else {
+			await stepContext.context.sendActivity(
+				`${stepContext.values.Entities.skillsEntity} added successfully`,
+			);
 
-	async sendHelpSuggestions(stepContext) {
-		await stepContext.context.sendActivity(
-			'hello i can help you,please apply leave or you want to check your leave status',
-		);
-		await stepContext.context.sendActivity({
-			attachments: [
-				CardFactory.heroCard(
-					'Here are some suggestions: ',
-					null,
-					CardFactory.actions([
-						{
-							type: 'imBack',
-							title: 'Portfolio',
-							value: 'Portfolio',
-						},
-						{
-							type: 'imBack',
-							title: 'Courses',
-							value: 'Courses',
-						},
-						{
-							type: 'imBack',
-							title: 'Add Certificates',
-							value: 'Add Certificates',
-						},
-						{
-							type: 'imBack',
-							title: 'Add Skills',
-							value: 'add skills',
-						},
-					]),
-				),
-			],
-		});
+			let userProfile = await this.userProfileAccessor.get(
+				stepContext.context,
+				{},
+			);
+			userProfile.skills = stepContext.values.Entities.skillsEntity;
 
+			//store data in object
+			user.skills.push({
+				skills: userProfile.skills,
+			});
+			await stepContext.context.sendActivity({
+				attachments: [
+					CardFactory.adaptiveCard(
+						showSkills(stepContext.values.Entities.skillsEntity),
+					),
+				],
+			});
+			await stepContext.context.sendActivity({
+				attachments: [
+					CardFactory.heroCard(
+						'Here are some suggestions: ',
+						null,
+						CardFactory.actions([
+							{
+								type: 'imBack',
+								title: 'Portfolio',
+								value: 'Portfolio',
+							},
+							{
+								type: 'imBack',
+								title: 'Courses',
+								value: 'Courses',
+							},
+							{
+								type: 'imBack',
+								title: 'Add Certificates',
+								value: 'Add Certificates',
+							},
+							{
+								type: 'imBack',
+								title: 'Add Skills',
+								value: 'Add Skills',
+							},
+						]),
+					),
+				],
+			});
+		}
 		return await stepContext.endDialog();
 	}
 }
