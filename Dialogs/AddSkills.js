@@ -9,6 +9,7 @@ const {
 const { CardFactory } = require('botbuilder');
 const { skillsDialog } = require('../Constants/dialogIDs.js');
 const { showSkills } = require('../cards/cards2');
+const { CancelAndHelpDialog } = require('./CancelAndHelpDialog.js');
 let user = require('./userProfile');
 
 const ChoicePromptDialog = 'ChoicePromptDialog';
@@ -17,7 +18,7 @@ const TextPromptDialog = 'TextPromptDialog';
 
 const skillsDialogWF1 = 'skillsDialogWF1';
 
-class SkillsDialog extends ComponentDialog {
+class SkillsDialog extends CancelAndHelpDialog {
 	constructor(userState, conversationState) {
 		super(skillsDialog);
 
