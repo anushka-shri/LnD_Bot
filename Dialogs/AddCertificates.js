@@ -6,9 +6,10 @@ const {
 	TextPrompt,
 } = require('botbuilder-dialogs');
 
+const { CancelAndHelpDialog } = require('./CancelAndHelpDialog');
 const { CardFactory } = require('botbuilder');
 const { AddCDialog } = require('../Constants/dialogIDs');
-const { showCertificate } = require('../cards/cards2');
+const { showCertificate, showOptions } = require('../cards/cards2');
 let user = require('./userProfile');
 
 const ChoicePromptDialog = 'ChoicePromptDialog';
@@ -16,7 +17,7 @@ const NumberPromptDialog = 'NumberPromptDialog';
 const TextPromptDialog = 'TextPromptDialog';
 
 const AddCDialogWF1 = 'AddCDialogWF1';
-class ADDCDialog extends ComponentDialog {
+class ADDCDialog extends CancelAndHelpDialog {
 	constructor(userState, conversationState) {
 		super(AddCDialog);
 
@@ -67,7 +68,7 @@ class ADDCDialog extends ComponentDialog {
 
 	async CertificateInput(stepContext) {
 		if (
-			stepContext.values.Entities.numberEntity &&
+			stepContext.values.Entities.numberEntity == null &&
 			stepContext.values.Entities.certificateNameEntity == null
 		) {
 			await stepContext.context.sendActivity(
@@ -84,7 +85,7 @@ class ADDCDialog extends ComponentDialog {
 
 	async ProviderInput(stepContext) {
 		if (
-			stepContext.values.Entities.numberEntity &&
+			stepContext.values.Entities.numberEntity == null &&
 			stepContext.values.Entities.certificateNameEntity == null
 		) {
 			stepContext.values.certificateNum = stepContext.result;
@@ -103,7 +104,7 @@ class ADDCDialog extends ComponentDialog {
 
 	async sendConfirmation(stepContext) {
 		if (
-			stepContext.values.Entities.numberEntity &&
+			stepContext.values.Entities.numberEntity == null &&
 			stepContext.values.Entities.certificateNameEntity == null
 		) {
 			stepContext.values.Provider = stepContext.result;
@@ -130,34 +131,7 @@ class ADDCDialog extends ComponentDialog {
 				],
 			});
 			return await stepContext.context.sendActivity({
-				attachments: [
-					CardFactory.heroCard(
-						'Here are some suggestions: ',
-						null,
-						CardFactory.actions([
-							{
-								type: 'imBack',
-								title: 'Portfolio',
-								value: 'Portfolio',
-							},
-							{
-								type: 'imBack',
-								title: 'Courses',
-								value: 'Courses',
-							},
-							{
-								type: 'imBack',
-								title: 'Add Certificates',
-								value: 'Add Certificates',
-							},
-							{
-								type: 'imBack',
-								title: 'Add Skills',
-								value: 'Add Skills',
-							},
-						]),
-					),
-				],
+				
 			});
 		} else {
 			let userProfile = await this.userProfileAccessor.get(
@@ -208,6 +182,11 @@ class ADDCDialog extends ComponentDialog {
 								type: 'imBack',
 								title: 'Add Skills',
 								value: 'Add Skills',
+							},
+							{
+								type: 'imBack',
+								title: 'Recharge',
+								value: 'Recharge',
 							},
 						]),
 					),

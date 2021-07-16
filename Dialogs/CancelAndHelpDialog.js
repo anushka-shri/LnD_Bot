@@ -30,6 +30,14 @@ class CancelAndHelpDialog extends ComponentDialog {
 					);
 					return { status: DialogTurnStatus.waiting };
 				}
+				case 'salary slip':
+				case 'bonus':
+				case 'reimbursement':
+				case 'pf':
+				case 'gratuity': {
+					await innerDc.beginDialog(rootDialog);
+					return { status: DialogTurnStatus.waiting };
+				}
 				case 'cancel':
 				case 'quit': {
 					const cancelMessageText = 'Cancelling...';

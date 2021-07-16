@@ -1,13 +1,14 @@
 const { ComponentDialog, WaterfallDialog } = require('botbuilder-dialogs');
 const { CardFactory } = require('botbuilder');
 const { portDialog } = require('../Constants/dialogIDs.js');
+const { CancelAndHelpDialog } = require('./CancelAndHelpDialog');
 const { myPortfolio } = require('../cards/cards2');
 const portDialogWF1 = 'portDialogWF1';
 
 let user = require('./userProfile');
 
 
-class PortFolioDialog extends ComponentDialog {
+class PortFolioDialog extends CancelAndHelpDialog {
 	constructor(userState, conversationState) {
 		super(portDialog);
 
@@ -97,6 +98,11 @@ class PortFolioDialog extends ComponentDialog {
 								type: 'imBack',
 								title: 'Add Skills',
 								value: 'Add Skills',
+							},
+							{
+								type: 'imBack',
+								title: 'Recharge',
+								value: 'Recharge',
 							},
 						]),
 					),

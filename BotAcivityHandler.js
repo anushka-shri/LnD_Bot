@@ -75,6 +75,11 @@ class BotActivityHandler extends ActivityHandler {
 									title: 'Add Skills',
 									value: 'Add Skills',
 								},
+								{
+									type: 'imBack',
+									title: 'Recharge',
+									value: 'Recharge',
+								},
 							]),
 						),
 					],

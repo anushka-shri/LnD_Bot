@@ -9,9 +9,10 @@ const {
 const { CardFactory } = require('botbuilder');
 const { skillsDialog } = require('../Constants/dialogIDs.js');
 const { showSkills } = require('../cards/cards2');
-const { CancelAndHelpDialog } = require('./CancelAndHelpDialog.js');
+
 let user = require('./userProfile');
 
+const { CancelAndHelpDialog } = require('./CancelAndHelpDialog');
 const ChoicePromptDialog = 'ChoicePromptDialog';
 const NumberPromptDialog = 'NumberPromptDialog';
 const TextPromptDialog = 'TextPromptDialog';
@@ -174,6 +175,11 @@ class SkillsDialog extends CancelAndHelpDialog {
 								type: 'imBack',
 								title: 'Add Skills',
 								value: 'Add Skills',
+							},
+							{
+								type: 'imBack',
+								title: 'Recharge',
+								value: 'Recharge',
 							},
 						]),
 					),

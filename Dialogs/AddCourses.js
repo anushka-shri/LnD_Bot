@@ -7,6 +7,7 @@ const {
 	Dialog,
 } = require('botbuilder-dialogs');
 
+const { CancelAndHelpDialog } = require('./CancelAndHelpDialog');
 const { coursesForm } = require('../cards/cards2');
 const { showCourse } = require('../cards/cards2');
 let user = require('./userProfile');
@@ -16,7 +17,7 @@ const WATERFALL_DIALOG = 'COURSE_DIALOG';
 const NAME_PROMPT = 'NAME_PROMPT';
 const NUMBER_PROMPT = 'NUMBER_PROMPT';
 
-class CoursesDialog extends ComponentDialog {
+class CoursesDialog extends CancelAndHelpDialog {
 	constructor(userState, conversationState) {
 		super('CoursesDialog');
 
@@ -118,8 +119,8 @@ class CoursesDialog extends ComponentDialog {
 						},
 						{
 							type: 'imBack',
-							title: 'Add Skills',
-							value: 'Add Skills',
+							title: 'Recharge',
+							value: 'Recharge',
 						},
 					]),
 				),

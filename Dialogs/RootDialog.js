@@ -11,11 +11,13 @@ const {
 	AddCDialog,
 	skillsDialog,
 	portDialog,
+	RechargeDialog
 } = require('../Constants/dialogIDs');
 const { ADDCDialog } = require('./AddCertificates');
 const { SkillsDialog } = require('./AddSkills.js');
 const { PortFolioDialog } = require('./Myportfolio');
 const { CoursesDialog } = require('./AddCourses');
+const { RechargeDialogue } = require('./RechargeDialog.js');
 
 const parseMessage = 'parseMessage';
 
@@ -46,6 +48,7 @@ class RootDialog extends ComponentDialog {
 		this.addDialog(new SkillsDialog(userState, conversationState));
 		this.addDialog(new CoursesDialog(userState, conversationState));
 		this.addDialog(new PortFolioDialog(userState, conversationState));
+		this.addDialog(new RechargeDialogue(userState, conversationState));
 		this.initialDialogId = parseMessage;
 	}
 
@@ -68,8 +71,8 @@ class RootDialog extends ComponentDialog {
 	async routeMessage(stepContext) {
 		let luisResponse = await this.recognizer.recognize(stepContext.context);
 		let luisIntent = luisResponse.luisResult.prediction.topIntent;
-		console.log(JSON.stringify(luisResponse.luisResult.prediction));
-		switch (luisIntent) {
+		console.log(JSON.stringify(luisResponse.luisResult));
+		switch (stepContext.context.activity.text || luisIntent) {
 			case 'Add Certificates':
 				return await stepContext.beginDialog(AddCDialog, {
 					luisResult: true,
@@ -90,7 +93,8 @@ class RootDialog extends ComponentDialog {
 					luisResult: true,
 					entities: luisResponse.luisResult.prediction.entities,
 				});
-
+			case 'Recharge':
+				return await stepContext.beginDialog(RechargeDialog);
 			default:
 				await stepContext.context.sendActivity('Sorry I am still learning');
 		}
