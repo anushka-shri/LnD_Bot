@@ -1,5 +1,4 @@
 const {
-	ComponentDialog,
 	WaterfallDialog,
 	ChoicePrompt,
 	NumberPrompt,
@@ -64,9 +63,7 @@ class SkillsDialog extends CancelAndHelpDialog {
 
 	async SkillsInput(stepContext) {
 		if (stepContext.values.Entities.skillsEntity == null) {
-			await stepContext.context.sendActivity(
-				'Please enter your skills details',
-			);
+
 			return await stepContext.prompt(
 				TextPromptDialog,
 				`Enter Skill details :`,
@@ -122,6 +119,11 @@ class SkillsDialog extends CancelAndHelpDialog {
 								type: 'imBack',
 								title: 'Add Skills',
 								value: 'Add Skills',
+							},
+							{
+								type: 'imBack',
+								title: 'Recharge',
+								value: 'Recharge',
 							},
 						]),
 					),

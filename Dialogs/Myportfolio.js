@@ -1,4 +1,4 @@
-const { ComponentDialog, WaterfallDialog } = require('botbuilder-dialogs');
+const { WaterfallDialog } = require('botbuilder-dialogs');
 const { CardFactory } = require('botbuilder');
 const { portDialog } = require('../Constants/dialogIDs.js');
 const { CancelAndHelpDialog } = require('./CancelAndHelpDialog');

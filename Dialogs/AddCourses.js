@@ -76,12 +76,12 @@ class CoursesDialog extends CancelAndHelpDialog {
 				{},
 			);
 
-			userProfile.courseName = stepContext.context.activity.value.courseName;
-			user.courses.push(userProfile.courseName);
+			userProfile.CourseName = stepContext.context.activity.value.CourseName;
+			user.courses.push(userProfile.CourseName);
 
 			await stepContext.context.sendActivity({
 				attachments: [
-					CardFactory.adaptiveCard(showCourse(userProfile.courseName)),
+					CardFactory.adaptiveCard(showCourse(userProfile.CourseName)),
 				],
 			});
 			return Dialog.EndOfTurn;
@@ -93,7 +93,7 @@ class CoursesDialog extends CancelAndHelpDialog {
 		let userProfile = await this.userProfileAccessor.get(stepContext.context);
 		console.log(userProfile);
 		await stepContext.context.sendActivity(
-			` ${userProfile.courseName} successfully added to your portfolio`,
+			` ${userProfile.CourseName} successfully added to your portfolio`,
 		);
 		await stepContext.context.sendActivity('Here are some suggestions:');
 		await stepContext.context.sendActivity({

@@ -7,6 +7,8 @@ const {
 	NumberPrompt,
 	TextPrompt,
 	ConfirmPrompt,
+	ChoicePrompt,
+	ChoiceFactory
 } = require('botbuilder-dialogs');
 
 const { Channels } = require('botbuilder-core');
@@ -15,6 +17,8 @@ const WATERFALL_DIALOG = 'CERTIFICATE_DIALOG';
 const NAME_PROMPT = 'NAME_PROMPT';
 const NUMBER_PROMPT = 'NUMBER_PROMPT';
 const CONFIRM_PROMPT = 'CONFIRM_PROMPT';
+const CHOICE_PROMPT = 'CHOICE_PROMPT';
+
 
 class RechargeDialogue extends CancelAndHelpDialog {
 	constructor(userState, conversationState) {
@@ -22,7 +26,7 @@ class RechargeDialogue extends CancelAndHelpDialog {
 
 		this.conversationState = conversationState;
 		this.userState = userState;
-		this.conersationStateAccessor =
+		this.conversationStateAccessor =
 			this.userState.createProperty('UserProfileState');
 
 		this.rechargeStateAccessor =
@@ -31,13 +35,16 @@ class RechargeDialogue extends CancelAndHelpDialog {
 		this.addDialog(new TextPrompt(NAME_PROMPT));
 		this.addDialog(new NumberPrompt(NUMBER_PROMPT));
 		this.addDialog(new ConfirmPrompt(CONFIRM_PROMPT));
+		this.addDialog(new ChoicePrompt(CHOICE_PROMPT));
 
 		this.addDialog(
 			new WaterfallDialog(WATERFALL_DIALOG, [
 				this.addRechargeProvider.bind(this),
 				this.amountOfRecharge.bind(this),
 				this.getPhoneNumber.bind(this),
+				this.RechargeProvider.bind(this),
 				this.sendConfirmation.bind(this),
+				
 			]),
 		);
 
@@ -46,10 +53,8 @@ class RechargeDialogue extends CancelAndHelpDialog {
 
 	async addRechargeProvider(stepContext) {
 		try {
-			await stepContext.context.sendActivity(
-				'Please enter your details correctly!',
-			);
-		return	await stepContext.prompt(
+
+			return await stepContext.prompt(
 				NAME_PROMPT,
 				'Please provide name of your service provider?',
 			);
@@ -66,8 +71,11 @@ class RechargeDialogue extends CancelAndHelpDialog {
 			);
 			stepContext.values.provider = stepContext.result;
 			dialogData.provider = stepContext.values.provider;
-			await stepContext.context.sendActivity('Please enter valid amount!');
-			return await stepContext.prompt(NUMBER_PROMPT, 'Enter the recharge amount :');
+			
+			return await stepContext.prompt(
+				NUMBER_PROMPT,
+				'Enter the recharge amount :',
+			);
 		} catch {
 			console.log(error);
 		}
@@ -88,16 +96,36 @@ class RechargeDialogue extends CancelAndHelpDialog {
 		}
 	}
 
+	async RechargeProvider(stepContext) {
+		try {
+			let dialogData = await this.rechargeStateAccessor.get(
+				stepContext.context,
+			);
+			dialogData.Phno = stepContext.result;
+			return await stepContext.prompt(CHOICE_PROMPT, {
+				prompt: 'Choose Payment method: ',
+				choices: ChoiceFactory.toChoices([
+					'Paytm',
+					'Net Banking',
+					'Credit Card',
+					'Debit Card',
+				]),
+			});
+		} catch {
+			console.log(error);
+		}
+	}
+
 	async sendConfirmation(stepContext) {
 		try {
 			let dialogData = await this.rechargeStateAccessor.get(
 				stepContext.context,
 			);
-            dialogData.Phno = stepContext.result;
-           await stepContext.context.sendActivity(
-                `Your Request of Recharge amount ${dialogData.amountVal} for 
-                ${dialogData.Phno} by ${dialogData.provider} is successful`
-			)
+			dialogData.Recharge_Provider = stepContext.result.value;
+			await stepContext.context.sendActivity(
+				`Your Request of Recharge amount ${dialogData.amountVal} for 
+                ${dialogData.Phno} by ${dialogData.provider} is successful by payment method ${dialogData.Recharge_Provider}`,
+			);
 			return await stepContext.context.sendActivity({
 				attachments: [
 					CardFactory.heroCard(
@@ -135,8 +163,8 @@ class RechargeDialogue extends CancelAndHelpDialog {
 			});
 		} catch (error) {
 			console.log(error);
-        }
-        return await stepContext.endDialog();
+		}
+		return await stepContext.endDialog();
 	}
 }
 

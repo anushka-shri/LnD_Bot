@@ -67,12 +67,12 @@ class RootDialog extends ComponentDialog {
 			console.log(err);
 		}
 	}
-
+    
 	async routeMessage(stepContext) {
 		let luisResponse = await this.recognizer.recognize(stepContext.context);
 		let luisIntent = luisResponse.luisResult.prediction.topIntent;
 		console.log(JSON.stringify(luisResponse.luisResult));
-		switch (stepContext.context.activity.text || luisIntent) {
+		switch(stepContext.context.activity.text || luisIntent) {
 			case 'Add Certificates':
 				return await stepContext.beginDialog(AddCDialog, {
 					luisResult: true,

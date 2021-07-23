@@ -30,7 +30,7 @@ class ADDCDialog extends CancelAndHelpDialog {
 		this.addDialog(new ChoicePrompt(ChoicePromptDialog));
 		this.addDialog(new NumberPrompt(NumberPromptDialog));
 		this.addDialog(new TextPrompt(TextPromptDialog));
-
+        
 		this.addDialog(
 			new WaterfallDialog(AddCDialogWF1, [
 				this.preProcessEntities.bind(this),
@@ -71,9 +71,7 @@ class ADDCDialog extends CancelAndHelpDialog {
 			stepContext.values.Entities.numberEntity == null &&
 			stepContext.values.Entities.certificateNameEntity == null
 		) {
-			await stepContext.context.sendActivity(
-				'Please enter your course details correctly !',
-			);
+
 			return await stepContext.prompt(
 				NumberPromptDialog,
 				`Enter Certificate No. :`,
@@ -131,7 +129,39 @@ class ADDCDialog extends CancelAndHelpDialog {
 				],
 			});
 			return await stepContext.context.sendActivity({
-				
+				attachments: [
+					CardFactory.heroCard(
+						'Here are some suggestions: ',
+						null,
+						CardFactory.actions([
+							{
+								type: 'imBack',
+								title: 'Portfolio',
+								value: 'Portfolio',
+							},
+							{
+								type: 'imBack',
+								title: 'Courses',
+								value: 'Courses',
+							},
+							{
+								type: 'imBack',
+								title: 'Add Certificates',
+								value: 'Add Certificates',
+							},
+							{
+								type: 'imBack',
+								title: 'Add Skills',
+								value: 'Add Skills',
+							},
+							{
+								type: 'imBack',
+								title: 'Recharge',
+								value: 'Recharge',
+							},
+						]),
+					),
+				],
 			});
 		} else {
 			let userProfile = await this.userProfileAccessor.get(

@@ -3,6 +3,9 @@
 
 const { InputHints } = require('botbuilder');
 const { CardFactory } = require('botbuilder');
+const {
+	rootDialog,
+} = require('../Constants/dialogIDs');
 const { ComponentDialog, DialogTurnStatus } = require('botbuilder-dialogs');
 
 class CancelAndHelpDialog extends ComponentDialog {
@@ -30,14 +33,7 @@ class CancelAndHelpDialog extends ComponentDialog {
 					);
 					return { status: DialogTurnStatus.waiting };
 				}
-				case 'salary slip':
-				case 'bonus':
-				case 'reimbursement':
-				case 'pf':
-				case 'gratuity': {
-					await innerDc.beginDialog(rootDialog);
-					return { status: DialogTurnStatus.waiting };
-				}
+
 				case 'cancel':
 				case 'quit': {
 					const cancelMessageText = 'Cancelling...';
@@ -46,37 +42,15 @@ class CancelAndHelpDialog extends ComponentDialog {
 						cancelMessageText,
 						InputHints.IgnoringInput,
 					);
-					await innerDc.cancelAllDialogs();
-					return await innerDc.context.sendActivity({
-						attachments: [
-							CardFactory.heroCard(
-								'Here are some suggestions: ',
-								null,
-								CardFactory.actions([
-									{
-										type: 'imBack',
-										title: 'Portfolio',
-										value: 'Portfolio',
-									},
-									{
-										type: 'imBack',
-										title: 'Courses',
-										value: 'Courses',
-									},
-									{
-										type: 'imBack',
-										title: 'Add Certificates',
-										value: 'Add Certificates',
-									},
-									{
-										type: 'imBack',
-										title: 'Add Skills',
-										value: 'Add Skills',
-									},
-								]),
-							),
-						],
-					});
+					return await innerDc.cancelAllDialogs();
+				}
+				case 'add certificates':
+				case 'add skills':
+				case 'courses':
+				case 'Portfolio':
+				case 'recharge': {
+					await innerDc.beginDialog(rootDialog);
+					return { status: DialogTurnStatus.waiting };
 				}
 			}
 		}
