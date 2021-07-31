@@ -1,0 +1,16 @@
+Label	Weight	Text
+l_Anushkaluis	1	java
+l_Anushkaluis	1	i want to see portfolio
+l_Anushkaluis	1	add new course
+l_Anushkaluis	1	show courses
+l_Anushkaluis	1	new provider is eerrwe
+l_Anushkaluis	1	i want to add scala to skills
+l_Anushkaluis	1	recharge
+l_Anushkaluis	1	my skills are machine learning, react
+l_Anushkaluis	1	new provider is byjus's
+l_Anushkaluis	1	i want to add courses
+l_Anushkaluis	1	provider is pluralsight
+l_Anushkaluis	1	add course
+q_qna-anushka	1	My Contoso smart light won't turn on.
+q_qna-anushka	1	How long does the light's battery last for
+q_qna-anushka	1	I upgraded the app and it doesn't work anymore.

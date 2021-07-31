@@ -1,5 +1,4 @@
 const {
-	ComponentDialog,
 	WaterfallDialog,
 	ChoicePrompt,
 	NumberPrompt,
@@ -30,13 +29,14 @@ class ADDCDialog extends CancelAndHelpDialog {
 		this.addDialog(new ChoicePrompt(ChoicePromptDialog));
 		this.addDialog(new NumberPrompt(NumberPromptDialog));
 		this.addDialog(new TextPrompt(TextPromptDialog));
-        
+
 		this.addDialog(
 			new WaterfallDialog(AddCDialogWF1, [
 				this.preProcessEntities.bind(this),
 				this.CertificateInput.bind(this),
 				this.ProviderInput.bind(this),
 				this.sendConfirmation.bind(this),
+				this.enddialog1.bind(this),
 			]),
 		);
 
@@ -71,7 +71,6 @@ class ADDCDialog extends CancelAndHelpDialog {
 			stepContext.values.Entities.numberEntity == null &&
 			stepContext.values.Entities.certificateNameEntity == null
 		) {
-
 			return await stepContext.prompt(
 				NumberPromptDialog,
 				`Enter Certificate No. :`,
@@ -222,7 +221,55 @@ class ADDCDialog extends CancelAndHelpDialog {
 					),
 				],
 			});
+
+			if (stepContext.options.interrupt == true) {
+				return await stepContext.prompt(CONFIRM_PROMPT, {
+					prompt: 'Do you want to continue?',
+				});
+			} else {
+				await stepContext.context.sendActivit('May I help you further?');
+				await stepContext.context.sendActivity({
+					attachments: [
+						CardFactory.heroCard(
+							'Here are some suggestions: ',
+							null,
+							CardFactory.actions([
+								{
+									type: 'imBack',
+									title: 'Portfolio',
+									value: 'Portfolio',
+								},
+								{
+									type: 'imBack',
+									title: 'Courses',
+									value: 'Courses',
+								},
+								{
+									type: 'imBack',
+									title: 'Add Certificates',
+									value: 'Add Certificates',
+								},
+								{
+									type: 'imBack',
+									title: 'Add Skills',
+									value: 'Add Skills',
+								},
+								{
+									type: 'imBack',
+									title: 'Recharge',
+									value: 'Recharge',
+								},
+							]),
+						),
+					],
+				});
+				return await stepContext.endDialog();
+			}
+			// return await stepContext.next();
 		}
+	}
+
+	async enddialog1(stepContext) {
 		return await stepContext.endDialog();
 	}
 }

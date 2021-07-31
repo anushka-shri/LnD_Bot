@@ -1,0 +1,16 @@
+Label	Weight	Text
+l_Anushkaluis	1	add new certificate by skill share
+l_Anushkaluis	1	add provider udacity
+l_Anushkaluis	1	add skills
+l_Anushkaluis	1	provider is unacademy
+l_Anushkaluis	1	i want to add certificate provided by udemy
+l_Anushkaluis	1	add new certificate number 56784 by internshala learnings
+l_Anushkaluis	1	i know python
+l_Anushkaluis	1	provider name is geeksforgeeks
+l_Anushkaluis	1	show me my profile
+l_Anushkaluis	1	show me all courses
+l_Anushkaluis	1	add skill perl
+l_Anushkaluis	1	my recharge
+q_qna-anushka	1	ssup
+q_qna-anushka	1	My smart light app stopped responding.
+q_qna-anushka	1	Why does the light not work

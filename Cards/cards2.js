@@ -1,4 +1,101 @@
 module.exports = {
+    myPortfolio: (user, certificateObj, skills) => {
+		return {
+			type: 'AdaptiveCard',
+			$schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+			version: '1.3',
+			body: [
+				{
+					type: 'Container',
+					items: [
+						{
+							type: 'TextBlock',
+							wrap: true,
+							text: 'My Portfolio',
+							horizontalAlignment: 'Left',
+							size: 'Large',
+							color: 'Accent',
+							weight: 'Bolder',
+						},
+					],
+					separator: true,
+				},
+				{
+					type: 'Container',
+					items: [
+						{
+							type: 'TextBlock',
+							wrap: true,
+							text: 'Courses Added',
+							size: 'Medium',
+							horizontalAlignment: 'Left',
+							weight: 'Bolder',
+						},
+					],
+					separator: true,
+				},
+				{
+					type: 'Container',
+					items: [
+						{
+							type: 'TextBlock',
+							wrap: true,
+							color: 'Accent',
+							text: `${user.courses}`,
+						},
+					],
+				},
+				{
+					type: 'Container',
+					separator: true,
+					items: [
+						{
+							type: 'TextBlock',
+							wrap: true,
+							text: 'Certificates Added',
+							size: 'Medium',
+							horizontalAlignment: 'Left',
+							weight: 'Bolder',
+						},
+					],
+				},
+				{
+					type: 'Container',
+					items: [
+						{
+							type: 'FactSet',
+							color: 'Accent',
+							facts: certificateObj,
+						},
+					],
+				},
+				{
+					type: 'Container',
+					separator: true,
+					items: [
+						{
+							type: 'TextBlock',
+							wrap: true,
+							text: 'Skills Added:-',
+							size: 'Medium',
+							horizontalAlignment: 'Left',
+							weight: 'Bolder',
+						},
+					],
+				},
+				{
+					type: 'Container',
+					items: [
+						{
+							type: 'FactSet',
+							color: 'Accent',
+							facts: skills
+						},
+					],
+				},
+			],
+		};
+	},
 	coursesForm: () => {
 		let course = {
 			type: 'AdaptiveCard',
@@ -127,103 +224,7 @@ module.exports = {
 
 		return course;
 	},
-	myPortfolio: (user, certificateObj, skills) => {
-		return {
-			type: 'AdaptiveCard',
-			$schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-			version: '1.3',
-			body: [
-				{
-					type: 'Container',
-					items: [
-						{
-							type: 'TextBlock',
-							wrap: true,
-							text: 'My Portfolio',
-							horizontalAlignment: 'Left',
-							size: 'Large',
-							color: 'Accent',
-							weight: 'Bolder',
-						},
-					],
-					separator: true,
-				},
-				{
-					type: 'Container',
-					items: [
-						{
-							type: 'TextBlock',
-							wrap: true,
-							text: 'Courses Added',
-							size: 'Medium',
-							horizontalAlignment: 'Left',
-							weight: 'Bolder',
-						},
-					],
-					separator: true,
-				},
-				{
-					type: 'Container',
-					items: [
-						{
-							type: 'TextBlock',
-							wrap: true,
-							color: 'Accent',
-							text: `${user.courses}`,
-						},
-					],
-				},
-				{
-					type: 'Container',
-					separator: true,
-					items: [
-						{
-							type: 'TextBlock',
-							wrap: true,
-							text: 'Certificates Added',
-							size: 'Medium',
-							horizontalAlignment: 'Left',
-							weight: 'Bolder',
-						},
-					],
-				},
-				{
-					type: 'Container',
-					items: [
-						{
-							type: 'FactSet',
-							color: 'Accent',
-							facts: certificateObj,
-						},
-					],
-				},
-				{
-					type: 'Container',
-					separator: true,
-					items: [
-						{
-							type: 'TextBlock',
-							wrap: true,
-							text: 'Skills Added:-',
-							size: 'Medium',
-							horizontalAlignment: 'Left',
-							weight: 'Bolder',
-						},
-					],
-				},
-				{
-					type: 'Container',
-					items: [
-						{
-							type: 'FactSet',
-							color: 'Accent',
-							facts: skills
-						},
-					],
-				},
-			],
-		};
-	},
+
 	showCertificate: (Certnumber, Prov) => {
 		return {
 			type: 'AdaptiveCard',

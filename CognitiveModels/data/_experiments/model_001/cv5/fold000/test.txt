@@ -1,0 +1,16 @@
+Label	Weight	Text
+l_Anushkaluis	1	my skills are java
+l_Anushkaluis	1	add certificate number 454555 by cisco
+l_Anushkaluis	1	add aws to the provider
+l_Anushkaluis	1	add scala to skills
+l_Anushkaluis	1	certificate is provided by coursera
+l_Anushkaluis	1	mern
+l_Anushkaluis	1	show my portfolio
+l_Anushkaluis	1	javascript
+l_Anushkaluis	1	add angular
+l_Anushkaluis	1	add new certificate by amazon
+l_Anushkaluis	1	add youtube as provider
+l_Anushkaluis	1	my skills are hacking, pen testing
+q_qna-anushka	1	Light doesn't work after upgrade.
+q_qna-anushka	1	Who should I contact for customer service
+q_qna-anushka	1	How do I contact support

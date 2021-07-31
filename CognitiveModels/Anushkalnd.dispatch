@@ -1,0 +1,39 @@
+{
+  "authoringRegion": "westus",
+  "hierarchical": true,
+  "useAllTrainingData": true,
+  "dontReviseUtterance": false,
+  "copyLuisData": true,
+  "normalizeDiacritics": true,
+  "services": [
+    {
+      "intentName": "l_Anushkaluis",
+      "appId": "d94d832b-37a3-496f-9806-66547af6ad15",
+      "authoringKey": "7dba0b10cb3440b88cfead2f7b1c15e0",
+      "version": "0.1",
+      "region": "westus",
+      "type": "luis",
+      "name": "Anushka_LnD",
+      "id": "1"
+    },
+    {
+      "intentName": "q_qna-anushka",
+      "includePrompts": true,
+      "kbId": "799d7881-8f8d-4cd2-8ea3-05024fa503d2",
+      "subscriptionKey": "0dee76f49f1f4fc3aab203528ef02a01",
+      "type": "qna",
+      "name": "Yukti_Bot",
+      "id": "2"
+    }
+  ],
+  "serviceIds": [
+    "1",
+    "2"
+  ],
+  "appId": "8715de13-898a-424e-9a8d-32949a5faeb4",
+  "authoringKey": "7dba0b10cb3440b88cfead2f7b1c15e0",
+  "version": "Dispatch",
+  "region": "westus",
+  "type": "dispatch",
+  "name": "Anushkalnd"
+}

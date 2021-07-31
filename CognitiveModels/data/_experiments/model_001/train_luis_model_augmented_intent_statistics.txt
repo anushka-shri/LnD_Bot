@@ -1,0 +1,4 @@
+No	Intent	Utterance Count	Utterance Average Length	Utterance Maximum Length	Utterance Minimum Length	Utterance Length StdDev
+0	l_Anushkaluis	61	20.39344	57	4	10.92746
+1	q_qna-anushka	14	26.28571	47	2	14.94826
+ 	__ALL__	75	21.49333	57	2	11.89182

@@ -1,0 +1,16 @@
+Label	Weight	Text
+l_Anushkaluis	1	select a course
+l_Anushkaluis	1	perl
+l_Anushkaluis	1	enroll into a course]
+l_Anushkaluis	1	microsoft
+l_Anushkaluis	1	unacademy is provider
+l_Anushkaluis	1	i wanna see my portfolio
+l_Anushkaluis	1	add python
+l_Anushkaluis	1	add certificate number 23451 by coursera
+l_Anushkaluis	1	provided by youtube
+l_Anushkaluis	1	add c to my skills
+l_Anushkaluis	1	i want add skills
+l_Anushkaluis	1	recharge this
+q_qna-anushka	1	What type of light bulb do I need
+q_qna-anushka	1	Hi
+q_qna-anushka	1	My Contoso smart light won't turn on.

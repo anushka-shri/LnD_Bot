@@ -1,0 +1,886 @@
+{
+  "luis_schema_version": "7.0.0",
+  "intents": [
+    {
+      "name": "Add Certificates",
+      "features": [
+        {
+          "featureName": "Providers",
+          "isRequired": false
+        },
+        {
+          "featureName": "helperPhrases",
+          "isRequired": false
+        }
+      ]
+    },
+    {
+      "name": "Add Skills",
+      "features": [
+        {
+          "featureName": "SkillsName",
+          "isRequired": false
+        },
+        {
+          "featureName": "skillHelperPhrases",
+          "isRequired": false
+        },
+        {
+          "modelName": "SkillsName",
+          "isRequired": false
+        }
+      ]
+    },
+    {
+      "name": "Courses",
+      "features": [
+        {
+          "featureName": "CoursesName",
+          "isRequired": false
+        }
+      ]
+    },
+    {
+      "name": "None",
+      "features": []
+    },
+    {
+      "name": "Portfolio",
+      "features": [
+        {
+          "featureName": "PortfolioHelper",
+          "isRequired": false
+        }
+      ]
+    },
+    {
+      "name": "Recharge",
+      "features": []
+    }
+  ],
+  "entities": [
+    {
+      "name": "CertificateName",
+      "children": [],
+      "roles": [],
+      "features": [
+        {
+          "featureName": "Providers",
+          "isRequired": false
+        },
+        {
+          "featureName": "helperPhrases",
+          "isRequired": false
+        }
+      ]
+    },
+    {
+      "name": "CourseName",
+      "children": [],
+      "roles": [],
+      "features": [
+        {
+          "featureName": "CoursesName",
+          "isRequired": false
+        },
+        {
+          "featureName": "CoursesHelper",
+          "isRequired": false
+        }
+      ]
+    },
+    {
+      "name": "SkillsName",
+      "children": [],
+      "roles": [],
+      "features": [
+        {
+          "featureName": "SkillsName",
+          "isRequired": false
+        },
+        {
+          "featureName": "skillHelperPhrases",
+          "isRequired": false
+        }
+      ]
+    },
+    {
+      "name": "ViewProfolio",
+      "children": [],
+      "roles": [],
+      "features": [
+        {
+          "featureName": "PortfolioHelper",
+          "isRequired": false
+        }
+      ]
+    }
+  ],
+  "hierarchicals": [],
+  "composites": [],
+  "closedLists": [],
+  "prebuiltEntities": [
+    {
+      "name": "number",
+      "roles": []
+    }
+  ],
+  "utterances": [
+    {
+      "text": "add angular",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 4,
+          "endPos": 10,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add aws to the provider",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 4,
+          "endPos": 6,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add c",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 4,
+          "endPos": 4,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add c to my skills",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 4,
+          "endPos": 4,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add certificate 1209384 by iit delhi",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 27,
+          "endPos": 35,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add certificate number 1234556 by linkedin",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 34,
+          "endPos": 41,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add certificate number 23451 by coursera",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 32,
+          "endPos": 39,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add certificate number 454555 by cisco",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 33,
+          "endPos": 37,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add course",
+      "intent": "Courses",
+      "entities": [
+        {
+          "entity": "CourseName",
+          "startPos": 4,
+          "endPos": 9,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add javascript to my skills",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 4,
+          "endPos": 13,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add me to a new course",
+      "intent": "Courses",
+      "entities": [
+        {
+          "entity": "CourseName",
+          "startPos": 16,
+          "endPos": 21,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add new certificate by amazon",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 23,
+          "endPos": 28,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add new certificate by skill share",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 23,
+          "endPos": 33,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add new certificate number 56784 by internshala learnings",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 36,
+          "endPos": 56,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add new course",
+      "intent": "Courses",
+      "entities": [
+        {
+          "entity": "CourseName",
+          "startPos": 8,
+          "endPos": 13,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add pluralsight",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 4,
+          "endPos": 14,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add provider udacity",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 13,
+          "endPos": 19,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add python",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 4,
+          "endPos": 9,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add recharge",
+      "intent": "Recharge",
+      "entities": []
+    },
+    {
+      "text": "add scala to skills",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 4,
+          "endPos": 8,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add skill perl",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 10,
+          "endPos": 13,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "add skills",
+      "intent": "Add Skills",
+      "entities": []
+    },
+    {
+      "text": "add youtube as provider",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 4,
+          "endPos": 10,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "by rrrrrrrr",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 3,
+          "endPos": 10,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "can i see my portfolio",
+      "intent": "Portfolio",
+      "entities": [
+        {
+          "entity": "ViewProfolio",
+          "startPos": 13,
+          "endPos": 21,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "certificate is provided by coursera",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 27,
+          "endPos": 34,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "display portfolio",
+      "intent": "Portfolio",
+      "entities": [
+        {
+          "entity": "ViewProfolio",
+          "startPos": 8,
+          "endPos": 16,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "enroll into a course]",
+      "intent": "Courses",
+      "entities": [
+        {
+          "entity": "CourseName",
+          "startPos": 14,
+          "endPos": 19,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "i know python",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 7,
+          "endPos": 12,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "i wanna see my portfolio",
+      "intent": "Portfolio",
+      "entities": [
+        {
+          "entity": "ViewProfolio",
+          "startPos": 15,
+          "endPos": 23,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "i wanna see portfolio",
+      "intent": "Portfolio",
+      "entities": [
+        {
+          "entity": "ViewProfolio",
+          "startPos": 12,
+          "endPos": 20,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "i want add skills",
+      "intent": "Add Skills",
+      "entities": []
+    },
+    {
+      "text": "i want to add certificate provided by udemy",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 38,
+          "endPos": 42,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "i want to add courses",
+      "intent": "Courses",
+      "entities": [
+        {
+          "entity": "CourseName",
+          "startPos": 14,
+          "endPos": 20,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "i want to add scala to skills",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 14,
+          "endPos": 18,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "i want to see portfolio",
+      "intent": "Portfolio",
+      "entities": [
+        {
+          "entity": "ViewProfolio",
+          "startPos": 14,
+          "endPos": 22,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "java",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 0,
+          "endPos": 3,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "javascript",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 0,
+          "endPos": 9,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "mern",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 0,
+          "endPos": 3,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "microsoft",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 0,
+          "endPos": 8,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "my recharge",
+      "intent": "Recharge",
+      "entities": []
+    },
+    {
+      "text": "my skills are hacking, pen testing",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 14,
+          "endPos": 33,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "my skills are java",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 14,
+          "endPos": 17,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "my skills are machine learning, react",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 14,
+          "endPos": 36,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "new provider is byjus's",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 16,
+          "endPos": 21,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "new provider is eerrwe",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 16,
+          "endPos": 21,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "perl",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 0,
+          "endPos": 3,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "provided by youtube",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 12,
+          "endPos": 18,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "provider is pluralsight",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 12,
+          "endPos": 22,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "provider is unacademy",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 12,
+          "endPos": 20,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "provider name is geeksforgeeks",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 17,
+          "endPos": 29,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "recharge",
+      "intent": "Recharge",
+      "entities": []
+    },
+    {
+      "text": "recharge this",
+      "intent": "Recharge",
+      "entities": []
+    },
+    {
+      "text": "scala",
+      "intent": "Add Skills",
+      "entities": [
+        {
+          "entity": "SkillsName",
+          "startPos": 0,
+          "endPos": 4,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "select a course",
+      "intent": "Courses",
+      "entities": [
+        {
+          "entity": "CourseName",
+          "startPos": 9,
+          "endPos": 14,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "show courses",
+      "intent": "Courses",
+      "entities": [
+        {
+          "entity": "CourseName",
+          "startPos": 5,
+          "endPos": 11,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "show me all courses",
+      "intent": "Courses",
+      "entities": [
+        {
+          "entity": "CourseName",
+          "startPos": 12,
+          "endPos": 18,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "show me my profile",
+      "intent": "Portfolio",
+      "entities": [
+        {
+          "entity": "ViewProfolio",
+          "startPos": 11,
+          "endPos": 17,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "show my portfolio",
+      "intent": "Portfolio",
+      "entities": [
+        {
+          "entity": "ViewProfolio",
+          "startPos": 8,
+          "endPos": 16,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "unacademy is provider",
+      "intent": "Add Certificates",
+      "entities": [
+        {
+          "entity": "CertificateName",
+          "startPos": 0,
+          "endPos": 8,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "where is my portfolio",
+      "intent": "Portfolio",
+      "entities": [
+        {
+          "entity": "ViewProfolio",
+          "startPos": 12,
+          "endPos": 20,
+          "children": []
+        }
+      ]
+    }
+  ],
+  "versionId": "0.1",
+  "name": "Anushka_LnD",
+  "desc": "",
+  "culture": "en-us",
+  "tokenizerVersion": "1.0.0",
+  "patternAnyEntities": [],
+  "regex_entities": [],
+  "phraselists": [
+    {
+      "name": "SkillsName",
+      "mode": true,
+      "words": "Javascript,C,C++,CPP,java,python,perl,sql,database,azure,cloud,burpsuite,wireshark,OWASP,django,MERN,React.js,Node,NODE.js,CSS,SASS,hacking,cybersecurity,app dev,web development,dynamodb,sqlite,product design,fashion,Music,Visual,Visual Arts,Gaming,Communication,HR,Sales,Mathematics,Biology,Databases,Elixir,Flask,gatsby,Graphql,D3.js,backbone.js,PHP,MEAN,Ruby on Rails",
+      "activated": true,
+      "enabledForAllModels": false
+    },
+    {
+      "name": "Providers",
+      "mode": true,
+      "words": "Pluralsight,udemy,coursera,udacity,geeksforgeeks,Cisco,IBM,CCNA,scrimba,azure,AWS,Amazon,skillshare,futureLearn,CodeAcademy,Zero To Mastery,Creative Live,LinkedIn Learning,Microsoft,Intel,Google,Salesforce,NPTEL",
+      "activated": true,
+      "enabledForAllModels": false
+    },
+    {
+      "name": "helperPhrases",
+      "mode": true,
+      "words": "is provided by,provider is,certified,certified by,add provider,by provider,by,from,as provider,is provider,is certified by,add certiticates,add certificates",
+      "activated": true,
+      "enabledForAllModels": false
+    },
+    {
+      "name": "skillHelperPhrases",
+      "mode": true,
+      "words": "add skills,my skills are,I know this,add to my skills,add new skills,add following skills,this is my skills,please add skills,my skills,skills are,skills,add to skills,by provider,provider is,provider,by,is provided by",
+      "activated": true,
+      "enabledForAllModels": false
+    },
+    {
+      "name": "PortfolioHelper",
+      "mode": true,
+      "words": "portfolio,CV,profile,show protfolio,show portfolio,show profile,see portfolio,see profile,my portfolio,my profile,see my portfolio,see my profile",
+      "activated": true,
+      "enabledForAllModels": false
+    },
+    {
+      "name": "CoursesName",
+      "mode": true,
+      "words": "Node,Data Science,CEH,Web Development,Java,Javascript,Linux,PHP",
+      "activated": true,
+      "enabledForAllModels": false
+    },
+    {
+      "name": "CoursesHelper",
+      "mode": true,
+      "words": "Add to my courses,add new course,add java to my courses,add course",
+      "activated": true,
+      "enabledForAllModels": false
+    }
+  ],
+  "regex_features": [],
+  "patterns": [
+    {
+      "pattern": "add skill {SkillsName}",
+      "intent": "Add Skills"
+    }
+  ],
+  "settings": []
+}

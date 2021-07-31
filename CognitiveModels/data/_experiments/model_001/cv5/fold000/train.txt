@@ -1,0 +1,61 @@
+Label	Weight	Text
+l_Anushkaluis	1	i wanna see portfolio
+l_Anushkaluis	1	add me to a new course
+l_Anushkaluis	1	scala
+l_Anushkaluis	1	by rrrrrrrr
+l_Anushkaluis	1	add c
+l_Anushkaluis	1	where is my portfolio
+l_Anushkaluis	1	can i see my portfolio
+l_Anushkaluis	1	add certificate 1209384 by iit delhi
+l_Anushkaluis	1	display portfolio
+l_Anushkaluis	1	add pluralsight
+l_Anushkaluis	1	add recharge
+l_Anushkaluis	1	add certificate number 1234556 by linkedin
+l_Anushkaluis	1	add new certificate by skill share
+l_Anushkaluis	1	add provider udacity
+l_Anushkaluis	1	add skills
+l_Anushkaluis	1	provider is unacademy
+l_Anushkaluis	1	i want to add certificate provided by udemy
+l_Anushkaluis	1	add new certificate number 56784 by internshala learnings
+l_Anushkaluis	1	i know python
+l_Anushkaluis	1	provider name is geeksforgeeks
+l_Anushkaluis	1	show me my profile
+l_Anushkaluis	1	show me all courses
+l_Anushkaluis	1	add skill perl
+l_Anushkaluis	1	my recharge
+l_Anushkaluis	1	select a course
+l_Anushkaluis	1	perl
+l_Anushkaluis	1	enroll into a course]
+l_Anushkaluis	1	microsoft
+l_Anushkaluis	1	unacademy is provider
+l_Anushkaluis	1	i wanna see my portfolio
+l_Anushkaluis	1	add python
+l_Anushkaluis	1	add certificate number 23451 by coursera
+l_Anushkaluis	1	provided by youtube
+l_Anushkaluis	1	add c to my skills
+l_Anushkaluis	1	i want add skills
+l_Anushkaluis	1	recharge this
+l_Anushkaluis	1	java
+l_Anushkaluis	1	i want to see portfolio
+l_Anushkaluis	1	add new course
+l_Anushkaluis	1	show courses
+l_Anushkaluis	1	new provider is eerrwe
+l_Anushkaluis	1	i want to add scala to skills
+l_Anushkaluis	1	recharge
+l_Anushkaluis	1	my skills are machine learning, react
+l_Anushkaluis	1	new provider is byjus's
+l_Anushkaluis	1	i want to add courses
+l_Anushkaluis	1	provider is pluralsight
+l_Anushkaluis	1	add course
+l_Anushkaluis	1	add javascript to my skills
+q_qna-anushka	1	Light won't turn on.
+q_qna-anushka	1	I need help.
+q_qna-anushka	1	Question
+q_qna-anushka	1	ssup
+q_qna-anushka	1	My smart light app stopped responding.
+q_qna-anushka	1	Why does the light not work
+q_qna-anushka	1	What type of light bulb do I need
+q_qna-anushka	1	Hi
+q_qna-anushka	1	My Contoso smart light won't turn on.
+q_qna-anushka	1	How long does the light's battery last for
+q_qna-anushka	1	I upgraded the app and it doesn't work anymore.

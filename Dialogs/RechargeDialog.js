@@ -1,8 +1,5 @@
-const { MessageFactory, CardFactory } = require('botbuilder');
+const {CardFactory} = require('botbuilder');
 const {
-	ComponentDialog,
-	DialogSet,
-	DialogTurnStatus,
 	WaterfallDialog,
 	NumberPrompt,
 	TextPrompt,
@@ -11,9 +8,8 @@ const {
 	ChoiceFactory
 } = require('botbuilder-dialogs');
 
-const { Channels } = require('botbuilder-core');
 const { CancelAndHelpDialog } = require('./CancelAndHelpDialog');
-const WATERFALL_DIALOG = 'CERTIFICATE_DIALOG';
+const WATERFALL_DIALOG = 'WATERFALL_DIALOG';
 const NAME_PROMPT = 'NAME_PROMPT';
 const NUMBER_PROMPT = 'NUMBER_PROMPT';
 const CONFIRM_PROMPT = 'CONFIRM_PROMPT';
@@ -44,6 +40,7 @@ class RechargeDialogue extends CancelAndHelpDialog {
 				this.getPhoneNumber.bind(this),
 				this.RechargeProvider.bind(this),
 				this.sendConfirmation.bind(this),
+				this.enddialog1.bind(this)
 				
 			]),
 		);
@@ -126,45 +123,60 @@ class RechargeDialogue extends CancelAndHelpDialog {
 				`Your Request of Recharge amount ${dialogData.amountVal} for 
                 ${dialogData.Phno} by ${dialogData.provider} is successful by payment method ${dialogData.Recharge_Provider}`,
 			);
-			return await stepContext.context.sendActivity({
-				attachments: [
-					CardFactory.heroCard(
-						'Here are some suggestions: ',
-						null,
-						CardFactory.actions([
-							{
-								type: 'imBack',
-								title: 'Portfolio',
-								value: 'Portfolio',
-							},
-							{
-								type: 'imBack',
-								title: 'Courses',
-								value: 'Courses',
-							},
-							{
-								type: 'imBack',
-								title: 'Add Certificates',
-								value: 'Add Certificates',
-							},
-							{
-								type: 'imBack',
-								title: 'Add Skills',
-								value: 'Add Skills',
-							},
-							{
-								type: 'imBack',
-								title: 'Recharge',
-								value: 'Recharge',
-							},
-						]),
-					),
-				],
-			});
+			console.log('recharge log', stepContext.options.interrupt);
+			if (stepContext.options.interrupt == true) {
+				return await stepContext.prompt(CONFIRM_PROMPT, {
+					prompt: 'Do you want to continue with previous dialog?'
+				})
+			}
+			else {
+				await stepContext.context.sendActivit('May I help you further?')
+				await stepContext.context.sendActivity({
+					attachments: [
+						CardFactory.heroCard(
+							'Here are some suggestions: ',
+							null,
+							CardFactory.actions([
+								{
+									type: 'imBack',
+									title: 'Portfolio',
+									value: 'Portfolio',
+								},
+								{
+									type: 'imBack',
+									title: 'Courses',
+									value: 'Courses',
+								},
+								{
+									type: 'imBack',
+									title: 'Add Certificates',
+									value: 'Add Certificates',
+								},
+								{
+									type: 'imBack',
+									title: 'Add Skills',
+									value: 'Add Skills',
+								},
+								{
+									type: 'imBack',
+									title: 'Recharge',
+									value: 'Recharge',
+								},
+							]),
+						),
+					],
+				});
+			
+			}
+				return await stepContext.next();
 		} catch (error) {
 			console.log(error);
 		}
-		return await stepContext.endDialog();
+		
+	}
+
+	async enddialog1(stepContext) {
+			return await stepContext.endDialog();
 	}
 }
 

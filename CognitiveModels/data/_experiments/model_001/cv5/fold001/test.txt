@@ -1,0 +1,16 @@
+Label	Weight	Text
+l_Anushkaluis	1	i wanna see portfolio
+l_Anushkaluis	1	add me to a new course
+l_Anushkaluis	1	scala
+l_Anushkaluis	1	by rrrrrrrr
+l_Anushkaluis	1	add c
+l_Anushkaluis	1	where is my portfolio
+l_Anushkaluis	1	can i see my portfolio
+l_Anushkaluis	1	add certificate 1209384 by iit delhi
+l_Anushkaluis	1	display portfolio
+l_Anushkaluis	1	add pluralsight
+l_Anushkaluis	1	add recharge
+l_Anushkaluis	1	add certificate number 1234556 by linkedin
+q_qna-anushka	1	Light won't turn on.
+q_qna-anushka	1	I need help.
+q_qna-anushka	1	Question
